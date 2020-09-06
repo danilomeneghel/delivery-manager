@@ -1,0 +1,33 @@
+<% layout('base') -%>
+<div class="panel">
+    <h2>Orders<h2>
+    <a class="btn btn-primary" href="/order-add">Add</a><br><br>
+    
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>User</td>
+                <th>E-mail</td>
+                <th>Product</td>
+                <th>Quantity</td>
+                <th>Delivery Date</td>
+                <th class="text-center">Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(function(details) { %>
+            <tr>
+                <td><%= details.user.name %></td>
+                <td><%= details.user.email %></td>
+                <td><%= details.product.name %></td>
+                <td><%= details.quantity %></td>
+                <td><%= new Date(details.deliveryDate).toLocaleString("pt-br", {timeZone: "UTC"}) %></td>
+                <td class="text-center">
+                    <a class="btn btn-primary" href="/order-edit/<%= details._id %>">Edit</a>
+                    <a class="btn btn-danger" href="/order-delete/<%= details._id %>">Delete</a>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>

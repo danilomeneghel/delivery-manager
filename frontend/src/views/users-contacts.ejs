@@ -1,0 +1,31 @@
+<% layout('base') -%>
+<div class="panel">
+    <h2>User Contacts<h2>
+    <a class="btn btn-primary" href="/user-contact-add">Add</a><br><br>
+    
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Name</td>
+                <th>Address</td>
+                <th>City</td>
+                <th>Phone</td>
+                <th class="text-center">Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(function(details) { %>
+            <tr>
+                <td><%= details.user.name %></td>
+                <td><%= details.address %></td>
+                <td><%= details.city %></td>
+                <td><%= details.phone %></td>
+                <td class="text-center">
+                    <a class="btn btn-primary" href="/user-contact-edit/<%= details._id %>">Edit</a>
+                    <a class="btn btn-danger" href="/user-contact-delete/<%= details._id %>">Delete</a>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
