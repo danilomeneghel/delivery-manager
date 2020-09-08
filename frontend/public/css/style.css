@@ -40,17 +40,18 @@ a:hover.btn {
 .bg-login {
     background-color: #e4e4e4;
 }
-.bg-login .container-login {
+
+.container-login {
     max-width: 342px;
     margin: 0px auto !important;
     padding-top: 60px !important;
 }
-.bg-login .container-register {
+.container-register {
     max-width: 342px;
     margin: 0px auto !important;
     padding-top: 120px !important;
 }
-.bg-login .container-login a {
+.container-login a {
     color: #333333 !important;
     text-decoration: none;
 }
@@ -513,8 +514,11 @@ fieldset {
     width:100%; 
     overflow:hidden; 
 }
+#contents div:nth-child(2) {
+    display: none;
+}
+
 .content{
-    display:none; 
     color:#000;
 }
 

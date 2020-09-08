@@ -7,7 +7,7 @@ import MUIDataTable from "mui-datatables";
 import api from "../services/api";
 import styles from "../styles/global";
 
-import TopBar from "../TopBar";
+import TopBar from "../template/TopBar";
 
 class Products extends Component {
 	

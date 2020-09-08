@@ -2,12 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src *;
+               script-src 'self' 'unsafe-inline' 'unsafe-eval' 127.0.0.1:*;
+               style-src  'self' 'unsafe-inline' 127.0.0.1">
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel='stylesheet' href='/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='/css/font-awesome.min.css' />
+    <link rel='stylesheet' href='/css/style.css' />
     <title>Delivery App</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="/js/input-mask.js"></script>
+    <script type="text/javascript" src="/js/tabs.js"></script>
   </body>
 </html>

@@ -8,7 +8,7 @@ import { Link as MaterialLink } from "@material-ui/core";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuIcon from "@material-ui/icons/Menu";
-import styles from "./styles/global";
+import styles from "../styles/global";
 
 class TopBar extends Component {
 
@@ -187,8 +187,8 @@ class TopBar extends Component {
                 onClose={this.handleClose}
                 className={classes.menuTopAccount}
                 >
-                    <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                    <MenuItem>Profile</MenuItem>
+                    <MenuItem><Link to="/logout">Logout</Link></MenuItem>
                 </Menu>
             </Grid>
           </Grid>

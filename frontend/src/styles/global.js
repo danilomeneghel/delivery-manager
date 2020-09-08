@@ -104,7 +104,7 @@ const styles = theme => ({
     fontSize: '2.1rem !important'
   },
   menuTopAccount: {
-    marginTop: '-235px !important'
+    marginTop: '-2px !important'
   }
 })
 

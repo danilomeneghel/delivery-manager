@@ -1,6 +1,68 @@
 const passport = require("passport"),
-    User = require("../models/user"),
-    LocalStrategy = require("passport-local")
+    jwt = require("jsonwebtoken"),
+    LocalStrategy = require("passport-local"),
+    passportJWT = require("passport-jwt"),
+    ExtractJWT = passportJWT.ExtractJwt,
+    JWTStrategy = passportJWT.Strategy,
+    User = require("../models/user")
+
+passport.use(new LocalStrategy({ usernameField: "username" },
+    function(username, password, done) {
+        User.findOne({ username: username }, function(err, user) {
+            if (err) {
+                return done(err)
+            }
+            if (user) {
+                user.comparePassword(password, function(err, isMatch) {
+                    if (err) throw err
+
+                    if (!isMatch) {
+                        return done(null, false, {
+                            password: "Password is wrong"
+                        })
+                    } else {
+                        return done(null, user)
+                    }
+                })
+            } else {
+                return done(null, false, {
+                    username: "Username not found"
+                })
+            }
+        })
+    })
+)
+
+passport.use(new JWTStrategy({
+        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+        secretOrKey   : '#delivery@token'
+    },
+    function (jwtPayload, cb) {
+        return User.findOneById(jwtPayload.id)
+            .then(user => {
+                return cb(null, user)
+            })
+            .catch(err => {
+                return cb(err)
+            })
+    }
+))
+
+exports.auth = (req, res) => { 
+    passport.authenticate("local", function(err, user, info) {
+        if (err) res.status(404).json(err)
+
+        if (user) {
+            const token = jwt.sign(user.toJSON(), '#delivery@token', { expiresIn: 604800 });
+            res.status(200).json({
+                user: { "username": user.username, "role": user.role, "status": user.status },
+                token: token
+            });
+        } else {
+            res.status(401).json(info)
+        }
+      })(req, res)
+}
 
 exports.index = (req, res) => {
     res.render("index")
@@ -8,18 +70,6 @@ exports.index = (req, res) => {
 
 exports.login = (req, res) => {
     res.render("login", { message: req.flash() })
-}
-
-exports.auth = (req, res, next) => { 
-    passport.use(new LocalStrategy(User.authenticate()))
-    passport.serializeUser(User.serializeUser())
-    passport.deserializeUser(User.deserializeUser())
-
-    passport.authenticate("local", {
-        successRedirect: "/",
-        failureRedirect: "/login",
-        failureFlash: "Username or Password invalid"
-    })(req, res, next)
 }
 
 exports.logout = (req, res) => {
@@ -31,19 +81,11 @@ exports.pageRegister = (req, res) => {
     res.render("login", { message: {} })
 }
 
-exports.addRegister = (req,res) => {
-    User.register(new User({
-        name: req.body.name,
-        email: req.body.email,
-        username: req.body.username,
-        role: "user",
-        status: "active"
-    }), req.body.password, 
-    (err, user) => {
-        if(err) return res.redirect('?error=' + err.message)
+exports.addRegister = (req, res) => {
+    User.create(req.body)
+    .then((result) => {
+        if(!result) return res.redirect('?error=' + result.message)
 
-        passport.authenticate("local")(req, res, function(){
-            res.render("login", { message: {'success': 'User successfully registered!'} })
-        })
+        res.render("login", { message: {'success': 'User successfully registered!'} })
     })
 }
