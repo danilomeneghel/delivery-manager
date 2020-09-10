@@ -82,11 +82,11 @@ class TopBar extends Component {
   render() {
     
     const { classes } = this.props;
-
+    
     return (
       <AppBar position="absolute" color="default" className={classes.appBar}>
         <Toolbar>
-          <Grid container spacing={12} alignItems="baseline">
+          <Grid container alignItems="baseline">
             <Grid item className={classes.flex}>
               <div className={classes.inline}>
                 <Typography variant="h6" color="inherit" noWrap>

@@ -7,3 +7,13 @@ export const login = token => {
 export const logout = () => {
   localStorage.removeItem(TOKEN_KEY);
 };
+export const getUserLogged = () => {
+  const token = localStorage.getItem(TOKEN_KEY);
+  if (token) { 
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace('-', '+').replace('_', '/');
+    return JSON.parse(window.atob(base64));
+  } else {
+    return null;
+  }
+};

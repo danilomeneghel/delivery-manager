@@ -74,9 +74,7 @@ exports.auth = (req, res, next) => {
     })(req, res, next)
 }
 
-exports.index = (req, res) => {
-    if(!req.isAuthenticated()) res.redirect("/login")
-
+exports.index = () => {
     res.render("index")
 }
 

@@ -4,7 +4,7 @@ const auth = require('../controllers/auth'),
 module.exports = (app) => {
 
     app.route('/')
-        .get(auth.index)
+        .get(user.isLoggedIn, auth.index)
     
     app.route('/signIn')
         .post(auth.signIn)
