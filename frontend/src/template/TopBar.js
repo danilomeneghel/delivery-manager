@@ -12,24 +12,32 @@ import styles from "../styles/global";
 
 class TopBar extends Component {
 
+  constructor (props) {
+		super(props);
+
+    this.open = false;
+    this.anchorEl = null;
+	}
+	
   state = {
     value: 0,
     menuDrawer: false,
-    anchorEl: false
+    open: false,
+    anchorEl: null
   };
   
   handleChange = (event, value) => {
     this.setState({ value });
   };
 
-  handleMenu = event => {
-    this.setState({ anchorEl: true });
+  handleMenu = (event) => {
+    this.setState({ open: true, anchorEl: true });
   };
 
-  handleClose = event => {
-    this.setState({ anchorEl: false });
+  handleClose = (event) => {
+    this.setState({ open: false, anchorEl: false });
   };
-
+ 
   mobileMenuOpen = event => {
     this.setState({ menuDrawer: true });
   };
@@ -183,7 +191,7 @@ class TopBar extends Component {
                     vertical: 'top',
                     horizontal: 'right',
                 }}
-                open={this.state.anchorEl}
+                open={this.state.open}
                 onClose={this.handleClose}
                 className={classes.menuTopAccount}
                 >

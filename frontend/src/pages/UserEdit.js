@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
-const UserEdit = props => {
-	const [ item, set ] = useState(props.current)
-	useEffect( () => {
-			set(props.current)
-		},
+const EditForm = props => {
+	const [ item, set ] = useState(props.currentEdit)
+	useEffect( () => { set(props.currentEdit) },
 		[ props ]
 	)
 
@@ -35,4 +33,4 @@ const UserEdit = props => {
 	)
 }
 
-export default UserEdit
+export default EditForm

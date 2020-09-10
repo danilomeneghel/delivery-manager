@@ -133,6 +133,10 @@ input:focus {
 	line-height: 2 !important;
 }
 
+.MuiButtonBase-root path {
+	color: #fff !important;
+}
+
 table th:last-child {
 	text-align: center !important;
 }
@@ -147,6 +151,11 @@ table th:last-child {
 
 .Mui-selected {
 	color: #000 !important;
+}
+
+.MuiMenu-list .Mui-selected {
+	color: #fff !important;
+	background-color: #202020 !important;
 }
 
 .MuiPaper-root, .MuiTable-root, .MuiTableCell-head {
@@ -167,6 +176,7 @@ table th:last-child {
 	font-size: 1rem !important;
 	padding: 5px 50px 5px 15px !important;
 	position: unset !important;
+	border-bottom: 1px solid #3b3b3b !important;
 }
 
 .MuiTableCell-body {
@@ -175,6 +185,11 @@ table th:last-child {
 
 .MuiTablePagination-caption {
 	color: #fff !important;
+}
+
+.MuiSelect-root {
+	color: #fff !important;
+	font-size: 0.75rem !important;
 }
 
 .modal {
