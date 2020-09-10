@@ -19,7 +19,7 @@ class SignIn extends Component {
       this.setState({ error: "Fill in the Username and Password fields" });
     } else {
       try {
-        const response = await api.post("/login", { username, password });
+        const response = await api.post("/signIn", { username, password });
         login(response.data.token);
         this.props.history.push("/");
       } catch (err) {

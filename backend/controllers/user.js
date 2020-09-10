@@ -27,9 +27,15 @@ exports.pageAdd = (req, res) => {
 }
 
 exports.userAdd = (req, res) => {
-    User.create(req.body)
-    .then((result) => {
-        if (!result) return res.render('user-add', { message: {'error': result} }) 
+    User.register(new User({
+        name: req.body.name,
+        email: req.body.email,
+        username: req.body.username,
+        role: req.body.role,
+        status: req.body.status
+    }), req.body.password, 
+    (err) => {
+        if (err) return res.render('user-add', { message: {'error': err} }) 
 
         res.redirect("/users")
     })

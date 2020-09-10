@@ -5,17 +5,13 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
-  background: #fff;
   img {
     width: 100px;
     margin: 10px 0 40px;
   }
   p {
-    color: #ff3333;
     margin-bottom: 15px;
-    border: 1px solid #ff3333;
     padding: 10px;
-    width: 100%;
     text-align: center;
   }
   input {

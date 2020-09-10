@@ -7,9 +7,8 @@ const styles = theme => ({
   appBar: {
     position: "relative",
     boxShadow: "none",
-    borderBottom: `1px solid ${theme.palette.grey["100"]}`,
-    backgroundColor: orange["A700"],
-    color: "#fff"
+    backgroundColor: `${orange["A700"]} !important`,
+    color: "#fff",
   },
   inline: {
     display: "inline"
@@ -75,20 +74,20 @@ const styles = theme => ({
     margin: '12px 25px',
   },
   addButton: {
-    color: '#fff',
-    backgroundColor: orange[500],
+    color: '#fff !important',
+    backgroundColor: '#ff852d !important',
     '&:hover': { backgroundColor: orange[700] },
     margin: '12px 25px',
   },
   editButton: {
-    color: '#fff',
-    backgroundColor: orange[500],
+    color: '#fff !important',
+    backgroundColor: '#ff852d !important',
     '&:hover': { backgroundColor: orange[700] },
     margin: '12px 25px',
   },
   viewButton: {
-    color: orange[700],
-    border: `1px solid ${orange["700"]}`,
+    color: '#ff852d !important',
+    border: '1px solid #ff9042',
     backgroundColor: '#fff',
     '&:hover': { backgroundColor: '#fff' },
     margin: '12px 25px',
@@ -96,6 +95,11 @@ const styles = theme => ({
   marginCenter: {
     display: 'block',
     textAlign: 'center',
+  },
+  marginHome: {
+    display: 'block',
+    textAlign: 'center',
+    paddingTop: '20px',
   },
   iconAccountMargin: {
     marginTop: '-8px !important',

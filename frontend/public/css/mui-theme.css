@@ -1,15 +1,15 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Lato",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	background-color: #121212 !important;
+	color: #fff !important;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+	"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Lato",
+	sans-serif;
+	-webkit-font-smoothing: antialiased;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 h2, h3 {
@@ -40,18 +40,141 @@ h2, h3 {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+a:hover {
+    text-decoration: none !important;
+    color: #333 !important;
+}
+
+input {
+	background-color: #121212 !important;
+	color: #fff !important;
+	border: none !important;
+}
+input:focus {
+    box-shadow: 1px 1px 5px #ff852d !important;
+    border: 1px solid #ff9042 !important;
+}
+
+.fa-user-circle {
+    color: #ff6d00 !important;
+}
+.fa-id-card {
+    color: #ff6d00 !important;
+}
+.fa-envelope {
+    color: #ff6d00 !important;
+}
+.fa-user {
+    color: #ff6d00 !important;
+}
+.fa-lock {
+    color: #ff6d00 !important;
+}
+
+.box-login {
+	box-shadow: 1px 3px 10px #50575b !important;
+	background-color: #202020 !important;
+	color: #fff !important;
+}
+
+.btn-login {
+    background-color: #ff6d00 !important;
+	color: #fff !important;
+	border: 1px solid #ff9042 !important;
+	box-shadow: 1px 2px 3px 0px #ff852d !important;
+}
+.btn-logout {
+    background-color: #ff6d00 !important;
+    color: #fff !important;
+    border: 1px solid #ff9042 !important;
+    box-shadow: 1px 2px 3px 0px #ff852d !important;
+}
+.btn-success {
+    background-color: #ff6d00 !important;
+    color: #fff !important;
+    border: 1px solid #ff9042 !important;
+    box-shadow: 1px 2px 3px 0px #ff852d !important;
+}
+.btn-default {
+    background-color: #fff !important;
+    color: #ff6d00 !important;
+    border: 1px solid #ff9042 !important;
+    box-shadow: 1px 2px 3px 0px #ff852d !important;
+}
+.btn-primary {
+    background-color: #ff6d00 !important;
+	color: #fff !important;
+	border: 1px solid #ff9042 !important;
+	box-shadow: 1px 2px 3px 0px #ff852d !important;
+}
+
+.tab {
+	border-right: none !important;
+}
+.tab span {
+	background-color: #808080 !important;
+}
+
+.selected span{
+    font-weight: bold;
+	border-top: 3px solid #ff6d00 !important;
+	background-color: #202020 !important;
+    color: #fff !important;
+}
+
+.content{
+    background-color: #202020 !important;
+    color: #fff !important;
+}
+
 .MuiTypography-h6 {
     font-family: "Lato",sans-serif;
-    font-weight: 600 !important;
+	font-weight: 600 !important;
+	line-height: 2 !important;
 }
 
 table th:last-child {
 	text-align: center !important;
 }
 
+.MuiTab-root {
+	font-size: 1rem !important;
+}
+
+.MuiButtonBase-root {
+	color: #fff !important;
+}
+
+.Mui-selected {
+	color: #000 !important;
+}
+
+.MuiPaper-root, .MuiTable-root, .MuiTableCell-head {
+	background-color: #121212 !important;
+	color: #fff !important;
+}
+
+.MuiTable-root {
+	margin: 15px !important;
+	width: 96% !important;
+}
+
+.MuiPaper-rounded {
+	margin: 10px !important;
+}
+
 .MuiTableCell-root {
 	font-size: 1rem !important;
 	padding: 5px 50px 5px 15px !important;
+	position: unset !important;
+}
+
+.MuiTableCell-body {
+	color: #fff !important;
+}
+
+.MuiTablePagination-caption {
+	color: #fff !important;
 }
 
 .modal {

@@ -32,29 +32,29 @@ a:hover.btn {
     text-decoration: none !important;
 }
 
-.container-fluid {
-    padding-left: 45px !important;
-    padding-right: 45px !important;
-}
-
 .bg-login {
     background-color: #e4e4e4;
 }
 
+.container-fluid {
+    padding-left: 45px !important;
+    padding-right: 45px !important;
+}
 .container-login {
-    max-width: 342px;
+    max-width: 350px;
     margin: 0px auto !important;
     padding-top: 60px !important;
 }
+.container-login a {
+    color: #333333;
+    text-decoration: none;
+}
 .container-register {
-    max-width: 342px;
+    max-width: 350px;
     margin: 0px auto !important;
     padding-top: 120px !important;
 }
-.container-login a {
-    color: #333333 !important;
-    text-decoration: none;
-}
+
 .logo-login {
     text-align: center;
     padding-bottom: 25px;
@@ -70,7 +70,7 @@ a:hover.btn {
 
 .panel {
     margin-bottom: 20px;
-    background-color: transparent !important;
+    background-color: transparent;
     border: 1px solid transparent;
     border-top-color: transparent;
     border-right-color: transparent;
@@ -88,6 +88,12 @@ a:hover.btn {
     padding: 15px;
 	/*border-radius: 10px 10px 10px 10px !important;*/
 }
+.panel-home {
+	display: block;
+    text-align: center;
+    padding: 15px;
+}
+
 .box-login {
     box-shadow: 1px 3px 12px #50575b;
     background-color: #fff;
@@ -488,7 +494,6 @@ fieldset {
     -webkit-box-flex: 2;
     flex-grow: 2;
     margin: 0px;
-    border-right: 1px solid rgb(204, 204, 204);
 }
 .tab span {
     height:50px;
@@ -499,6 +504,7 @@ fieldset {
     align-items: center;
     -webkit-box-flex: 2;
     flex-grow: 2;
+    color: #000;
     background-color: #f0f0f0;
 }
 .active{
@@ -514,7 +520,7 @@ fieldset {
     width:100%; 
     overflow:hidden; 
 }
-#contents div:nth-child(2) {
+#contents .content:last-child {
     display: none;
 }
 
