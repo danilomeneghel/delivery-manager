@@ -56,7 +56,7 @@ input:focus {
 }
 
 button {
-	margin: 0px 10px !important;
+	margin: 0px 6px 0px 0px !important;
 }
 
 .fa-user-circle {
@@ -140,6 +140,16 @@ button {
 	font-weight: 600 !important;
 	font-size: 1.3rem !important;
 	line-height: 2 !important;
+	padding-left: 10px !important;
+}
+
+.MuiToolbar-gutters {
+	padding-left: 12px !important;
+	padding-right: 12px !important;
+}
+
+.MuiIconButton-root {
+	padding: 5px 1px !important;
 }
 
 .MuiButtonBase-root path {
@@ -148,7 +158,7 @@ button {
 
 table th:last-child {
 	text-align: center !important;
-	width: 250px !important;
+	width: 200px !important;
 }
 
 table th:last-child span {
@@ -184,8 +194,12 @@ table th:last-child span {
 
 .MuiTableCell-head {
 	font-weight: 600 !important;
-	font-size: 1.1rem !important;
-	line-height: 3 !important;
+	font-size: 1.2rem !important;
+	line-height: 1.5 !important;
+}
+
+.MuiTableCell-head div {
+	color: #fff !important;
 }
 
 .MUIDataTableHeadCell-sortActive-370 {
@@ -196,9 +210,13 @@ table th:last-child span {
 	margin: 10px !important;
 }
 
+.MuiTableCell-paddingCheckbox {
+	width: 0px !important;
+}
+
 .MuiTableCell-root {
 	font-size: 1rem !important;
-	padding: 5px 25px 5px 5px !important;
+	padding: 5px 5px 5px 5px !important;
 	position: unset !important;
 	border-bottom: 1px solid #3b3b3b !important;
 }
@@ -214,6 +232,10 @@ table th:last-child span {
 .MuiSelect-root {
 	color: #fff !important;
 	font-size: 0.75rem !important;
+}
+
+.MuiButton-sizeSmall {
+	padding: 4px 4px !important;
 }
 
 .modal {
