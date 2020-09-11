@@ -1,15 +1,14 @@
-import React from 'react'
-import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
-import Home from './pages/Home'
-import Orders from './pages/Orders'
-import Products from './pages/Products'
-import Users from './pages/Users'
-import UsersContacts from './pages/UsersContacts'
-import { isAuthenticated } from "./services/auth";
+import React from 'react';
+import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import Home from './pages/Home';
+import Orders from './pages/Orders';
+import Products from './pages/Products';
+import Users from './pages/Users';
+import UsersContacts from './pages/UsersContacts';
 import Login from "./pages/Login";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import { logout } from "./services/auth";
+import { isAuthenticated, logout } from "./services/auth";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route

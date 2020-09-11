@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect, Fragment } from 'react';
 
 const ViewForm = props => {
 	const [ item, set ] = useState(props.currentEdit)

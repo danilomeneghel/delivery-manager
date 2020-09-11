@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Form } from "../styles/form";
 
 const AddForm = props => {
