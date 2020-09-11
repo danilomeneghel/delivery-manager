@@ -55,6 +55,10 @@ input:focus {
     border: 1px solid #ff9042 !important;
 }
 
+button {
+	margin: 0px 10px !important;
+}
+
 .fa-user-circle {
     color: #ff6d00 !important;
 }
@@ -144,6 +148,11 @@ input:focus {
 
 table th:last-child {
 	text-align: center !important;
+	width: 250px !important;
+}
+
+table th:last-child span {
+	display: inline-block !important;
 }
 
 .MuiTab-root {
@@ -169,8 +178,8 @@ table th:last-child {
 }
 
 .MuiTable-root {
-	margin: 15px !important;
-	width: 96% !important;
+	width: 98% !important;
+	margin: 0px 15px !important;
 }
 
 .MuiTableCell-head {
@@ -189,7 +198,7 @@ table th:last-child {
 
 .MuiTableCell-root {
 	font-size: 1rem !important;
-	padding: 5px 50px 5px 15px !important;
+	padding: 5px 25px 5px 5px !important;
 	position: unset !important;
 	border-bottom: 1px solid #3b3b3b !important;
 }

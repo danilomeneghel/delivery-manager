@@ -18,7 +18,6 @@ class Users extends Component {
 		this.title = 'Users List';
 		this.state = { add: false, edit: false, view: false };	
 		this.array = [];
-		this.data = [];
 	}
 	
 	componentDidMount() {
@@ -51,7 +50,7 @@ class Users extends Component {
 	};
 	
 	addForm = item => {
-		item._id = this.data.length + 1;
+		item._id = this.array.length + 1;
 		const items = [
 			item.name, 
 			item.username, 
@@ -59,7 +58,7 @@ class Users extends Component {
 			item.role, 
 			item.status, 
 			''];
-		this.setState({ array: this.data.concat([items]) });
+		this.setState({ array: this.array.concat([items]) });
 		this.handleClose();
 	};
 
@@ -83,7 +82,7 @@ class Users extends Component {
 			item.role, 
 			item.status, 
 			''];
-		this.setState({ array: this.data.map(result => (result[0] === _id ? items : result)) });
+		this.setState({ array: this.array.map(result => (result[0] === _id ? items : result)) });
 		this.handleClose();
 	};
 	
@@ -102,7 +101,7 @@ class Users extends Component {
 	render() {
 		
 		const { classes } = this.props;		
-				
+
 		if(!!this.state.results) {
 			this.array = this.state.results.map(result => [
 				result.name, 
@@ -112,13 +111,7 @@ class Users extends Component {
 				result.status, 
 				'']);
 		}
-		
-		if(!!this.state.array) {
-			this.data = this.state.array;
-		} else {
-			this.data = this.array;
-		}
-		
+				
 		const columns = [
 			{ name: 'Name', options: {filter: true} },
 			{ name: 'Username', options: {filter: true} },
@@ -148,7 +141,7 @@ class Users extends Component {
 			filter: true,
 			selectableRows: true,
 			filterType: 'dropdown',
-			responsive: '',
+			responsive: 'stacked',
 			rowsPerPage: 10,
 			customToolbar: () => {
 			  return (
@@ -166,7 +159,7 @@ class Users extends Component {
 			<div className={classes.root}>
 				<MUIDataTable
 				title={this.title}
-				data={this.data}
+				data={this.array}
 				columns={columns}
 				options={options}/>
 				
