@@ -16,14 +16,9 @@ class Users extends Component {
 		super(props);
 
 		this.title = 'Users List';
-		this.add = false;
-		this.edit = false;
-		this.view = false;
 		this.state = { add: false, edit: false, view: false };	
 		this.array = [];
 		this.data = [];
-		this.currentEdit = [];
-		this.editing = false;
 	}
 	
 	componentDidMount() {
@@ -93,7 +88,7 @@ class Users extends Component {
 	};
 	
 	viewButton = item => {
-		this.setState({ arrayEdit: {
+		this.setState({ arrayView: {
 			name: item[0], 
 			username: item[1], 
 			email: item[2], 
@@ -107,7 +102,6 @@ class Users extends Component {
 	render() {
 		
 		const { classes } = this.props;		
-		var currentEdit = [];
 				
 		if(!!this.state.results) {
 			this.array = this.state.results.map(result => [
@@ -124,8 +118,6 @@ class Users extends Component {
 		} else {
 			this.data = this.array;
 		}
-		
-		currentEdit = this.state.arrayEdit;
 		
 		const columns = [
 			{ name: 'Name', options: {filter: true} },
@@ -190,7 +182,7 @@ class Users extends Component {
 								<div id="simple-modal-description">
 									<EditForm
 									editing={this.state.edit}
-									currentEdit={currentEdit}
+									currentEdit={this.state.arrayEdit}
 									editForm={this.editForm}/>
 								</div>
 							</Fragment>
@@ -205,7 +197,7 @@ class Users extends Component {
 							<Fragment>
 								<h2 id="simple-modal-title">View User</h2>
 								<div id="simple-modal-description">
-									<ViewForm currentEdit={currentEdit}/>
+									<ViewForm currentView={this.state.arrayView}/>
 								</div>
 							</Fragment>
 						))}	

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 
 const ViewForm = props => {
-	const [ item, set ] = useState(props.currentEdit)
-	useEffect( () => { set(props.currentEdit) },
+	const [ item, setForm ] = useState(props.currentView)
+	useEffect( () => { setForm(props.currentView) },
 		[ props ]
 	)
 

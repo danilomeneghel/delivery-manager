@@ -38,35 +38,35 @@ class SignUp extends Component {
         <Form onSubmit={this.handleSignUp}>
           {this.state.success && <p>{this.state.success}</p>}
           {this.state.error && <p>{this.state.error}</p>}
-          <i class="fa fa-user-circle"></i>
+          <i className="fa fa-user-circle"></i>
           <input
             type="text"
             placeholder="Name"
             onChange={e => this.setState({ name: e.target.value })}
-            class="input-login"
+            className="input-login"
           />
-          <i class="fa fa-envelope"></i>
+          <i className="fa fa-envelope"></i>
           <input
             type="email"
             placeholder="E-mail"
             onChange={e => this.setState({ email: e.target.value })}
-            class="input-login"
+            className="input-login"
           />
-          <i class="fa fa-user"></i>
+          <i className="fa fa-user"></i>
           <input
             type="text"
             placeholder="Username"
             onChange={e => this.setState({ username: e.target.value })}
-            class="input-login"
+            className="input-login"
           />
-          <i class="fa fa-lock"></i>
+          <i className="fa fa-lock"></i>
           <input
             type="password"
             placeholder="Password"
             onChange={e => this.setState({ password: e.target.value })}
-            class="input-login"
+            className="input-login"
           />
-          <button type="submit" class="btn btn-login btn-lg btn-block">Sign Up</button>
+          <button type="submit" className="btn btn-login btn-lg btn-block">Sign Up</button>
         </Form>
       </Container>
     );

@@ -8,34 +8,34 @@ class Login extends Component {
   render() {
     return (
         <Fragment>
-            <div class="container-login">
-                <div class="logo-login"></div>
-                <div class="panel">
-                    <div class="box-login">
-                        <div class="tabs">
-                            <div class="tab">
+            <div className="container-login">
+                <div className="logo-login"></div>
+                <div className="panel">
+                    <div className="box-login">
+                        <div className="tabs">
+                            <div className="tab">
                                 <span>Sign In</span>
                             </div>
-                            <div class="tab">
+                            <div className="tab">
                                 <span>Sign Up</span>
                             </div>
                         </div>
 
-                        <div id="contents" class="panel-body">
-                            <div class="content">
-                                <div class="form-panel">
+                        <div id="contents" className="panel-body">
+                            <div className="content">
+                                <div className="form-panel">
                                     <SignIn />
                                     <br /><br />
-                                    <div class="text-center">
-                                        <div class="login-teste">Login de Teste:</div>
+                                    <div className="text-center">
+                                        <div className="login-teste">Login de Teste:</div>
                                         Usuário: admin<br />
                                         Senha: admin123<br />
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="content">
-                                <div class="form-panel">
+                            <div className="content">
+                                <div className="form-panel">
                                     <SignUp />
                                 </div>
                             </div>

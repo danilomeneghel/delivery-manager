@@ -3,11 +3,11 @@ import { Form } from "../styles/form";
 
 const AddForm = props => {
 	const initialFormState = []
-	const [ item, set ] = useState(initialFormState)
+	const [ item, setForm ] = useState(initialFormState)
 		
 	const handleInputChange = event => {
 		const { name, value } = event.target
-		set({ ...item, [name]: value })
+		setForm({ ...item, [name]: value })
 	}
 	
 	return (
@@ -16,7 +16,7 @@ const AddForm = props => {
 				event.preventDefault()
 				if (!item.name || !item.username) return
 				props.addForm(item)
-				set(initialFormState)
+				setForm(initialFormState)
 			}}
 		>
 			<label>Name: </label>
@@ -34,8 +34,8 @@ const AddForm = props => {
 			<label>Status: </label>
 			<input type="text" name="status" value={item.status} onChange={handleInputChange}/><br /><br />
 
-			<button><i class="fa fa-close"></i> Cancel</button> 
-			<button><i class="fa fa-hdd-o"></i> Save</button>
+			<button><i className="fa fa-close"></i> Cancel</button> 
+			<button><i className="fa fa-hdd-o"></i> Save</button>
 			<br /><br />
 		</Form>
 	)

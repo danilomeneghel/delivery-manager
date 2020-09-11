@@ -36,21 +36,21 @@ class SignIn extends Component {
         <Form onSubmit={this.handleSignIn}>
           {this.state.success && <p>{this.state.success}</p>}
           {this.state.error && <p>{this.state.error}</p>}
-          <i class="fa fa-user"></i>
+          <i className="fa fa-user"></i>
           <input
             type="username"
             placeholder="Username"
             onChange={e => this.setState({ username: e.target.value })}
-            class="input-login"
+            className="input-login"
           />
-          <i class="fa fa-lock"></i>
+          <i className="fa fa-lock"></i>
           <input
             type="password"
             placeholder="Password"
             onChange={e => this.setState({ password: e.target.value })}
-            class="input-login"
+            className="input-login"
           />
-          <button type="submit" class="btn btn-login btn-lg btn-block">Sign In</button>
+          <button type="submit" className="btn btn-login btn-lg btn-block">Sign In</button>
         </Form>
       </Container>
     );

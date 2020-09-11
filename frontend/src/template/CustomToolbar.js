@@ -18,7 +18,7 @@ class CustomToolbar extends Component {
       <Fragment>
         <Tooltip title={"Add Item"}>
           <IconButton className={classes.iconButton} onClick={this.props.addButton}>
-            <AddIcon className={classes.deleteIcon} />
+            <AddIcon />
           </IconButton>
         </Tooltip>
       </Fragment>
