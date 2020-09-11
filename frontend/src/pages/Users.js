@@ -1,23 +1,27 @@
 import React, { Component, Fragment  } from 'react';
-import AddForm from './UserAdd'
-import EditForm from './UserEdit'
 import withStyles from "@material-ui/styles/withStyles";
 import { Button, Icon, Modal } from "@material-ui/core";
 import MUIDataTable from "mui-datatables";
 import api from "../services/api";
 import styles from "../styles/global";
-
 import TopBar from "../template/TopBar";
+import CustomToolbar from "../template/CustomToolbar";
+import AddForm from './UserAdd';
+import EditForm from './UserEdit';
+import ViewForm from './UserView';
 
 class Users extends Component {
 	
 	constructor (props) {
 		super(props);
 
-		this.title = 'Users';
-		this.open = false;
-		this.state = { open: false, edit: false };	
+		this.title = 'Users List';
+		this.add = false;
+		this.edit = false;
+		this.view = false;
+		this.state = { add: false, edit: false, view: false };	
 		this.array = [];
+		this.data = [];
 		this.currentEdit = [];
 		this.editing = false;
 	}
@@ -31,24 +35,80 @@ class Users extends Component {
 		});
 	}
 
+	handleAdd = () => {
+		this.setState({ add: true, edit: false, view: false });
+	};
+	
+	handleEdit = () => {
+		this.setState({ add: false, edit: true, view: false });
+	};
+	
+	handleView = () => {
+		this.setState({ add: false, edit: false, view: true });
+	};
+	
+	handleClose = () => {
+		this.setState({ add: false, edit: false, view: false });
+	};
+	
+	addButton = () => {
+		this.handleAdd();
+	};
+	
+	addForm = item => {
+		item._id = this.data.length + 1;
+		const items = [
+			item.name, 
+			item.username, 
+			item.email, 
+			item.role, 
+			item.status, 
+			''];
+		this.setState({ array: this.data.concat([items]) });
+		this.handleClose();
+	};
+
+	editButton = item => {
+		this.setState({ arrayEdit: {
+			name: item[0], 
+			username: item[1], 
+			email: item[2], 
+			role: item[3], 
+			status: item[4], 
+			action: ''} 
+		});
+		this.handleEdit();
+	};
+	
+	editForm = (_id, item) => {
+		const items = [
+			item.name, 
+			item.username, 
+			item.email, 
+			item.role, 
+			item.status, 
+			''];
+		this.setState({ array: this.data.map(result => (result[0] === _id ? items : result)) });
+		this.handleClose();
+	};
+	
+	viewButton = item => {
+		this.setState({ arrayEdit: {
+			name: item[0], 
+			username: item[1], 
+			email: item[2], 
+			role: item[3], 
+			status: item[4], 
+			action: ''} 
+		});
+		this.handleView();
+	};
+
 	render() {
 		
-		const { classes } = this.props;
-		var data = [];
-		var open = false;
-		var editing = false;
+		const { classes } = this.props;		
 		var currentEdit = [];
-		
-		const handleOpen = () => {
-			this.setState({ open: true });
-		};
-		
-		const handleClose = () => {
-			this.setState({ open: false });
-		};
-		
-		open = this.state.open;
-		
+				
 		if(!!this.state.results) {
 			this.array = this.state.results.map(result => [
 				result.name, 
@@ -60,108 +120,61 @@ class Users extends Component {
 		}
 		
 		if(!!this.state.array) {
-			data = this.state.array;
+			this.data = this.state.array;
 		} else {
-			data = this.array;
+			this.data = this.array;
 		}
 		
-		// CRUD operations
-		const addForm = item => {
-			item._id = data.length + 1;
-			const items = [
-				item.name, 
-				item.username, 
-				item.email, 
-				item.role, 
-				item.status, 
-				''];
-			this.setState({ array: data.concat([items]) });
-			handleClose();
-		};
-		
-		const addButton = () => {
-			this.setState({ edit: false });
-			handleOpen();
-		};
-		
-		const editForm = (_id, item) => {
-			this.setState({ edit: false });
-			const items = [
-				item.name, 
-				item.username, 
-				item.email, 
-				item.role, 
-				item.status, 
-				''];
-			this.setState({ array: data.map(result => (result[0] === _id ? items : result)) });
-			handleClose();
-		};
-		
-		const editButton = item => {
-			this.setState({ edit: true });
-			this.setState({ arrayEdit: {
-				name: item[0], 
-				username: item[1], 
-				email: item[2], 
-				role: item[3], 
-				status: item[4], 
-				action: ''} 
-			});
-			handleOpen();
-		};
-		
-		/*const deleteForm = _id => {
-			this.setState({ edit: false });
-			this.setState({ array: data.filter(item => item._id !== _id) });
-		};*/
-
-		editing = this.state.edit;
 		currentEdit = this.state.arrayEdit;
 		
 		const columns = [
-		  { name: 'Name', options: {filter: true} },
-		  { name: 'Username', options: {filter: true} },
-		  { name: 'E-mail', options: {filter: true} },
-		  { name: 'Role', options: {filter: true} },
-		  { name: 'Status', options: {filter: true} },
-		  { name: "Action", 
-			options: {
-			  filter: false,
-			  customBodyRender: (value, tableMeta, updateValue) => {
-				return (
-				  <Fragment>
-					<Button variant="contained" className={classes.viewButton} size="small" onClick={() => {editButton(tableMeta.rowData)}}>
-						<Icon>visibility</Icon> View
-					</Button>
-					<Button variant="contained" className={classes.editButton} size="small" onClick={() => {editButton(tableMeta.rowData)}}>
-						<Icon>edit</Icon> Edit
-					</Button>
-				  </Fragment>
-				);
-			  }
+			{ name: 'Name', options: {filter: true} },
+			{ name: 'Username', options: {filter: true} },
+			{ name: 'E-mail', options: {filter: true} },
+			{ name: 'Role', options: {filter: true} },
+			{ name: 'Status', options: {filter: true} },
+			{ name: "Action", 
+				options: {
+					filter: false,
+					customBodyRender: (value, tableMeta, updateValue) => {
+					return (
+						<Fragment>
+							<Button variant="contained" className={classes.viewButton} size="small" onClick={() => {this.viewButton(tableMeta.rowData)}}>
+								<Icon>visibility</Icon> View
+							</Button>
+							<Button variant="contained" className={classes.editButton} size="small" onClick={() => {this.editButton(tableMeta.rowData)}}>
+								<Icon>edit</Icon> Edit
+							</Button>
+						</Fragment>
+					);
+					}
+				}
 			}
-		  }
 		];
 		
 		const options = {
-		  filter: true,
-		  filterType: "dropdown",
-		  responsive: ""
+			filter: true,
+			selectableRows: true,
+			filterType: 'dropdown',
+			responsive: '',
+			rowsPerPage: 10,
+			customToolbar: () => {
+			  return (
+				<CustomToolbar addButton={this.addButton} />
+			  );
+			}
 		};
 		
 		const currentPath = this.props.location.pathname;
-		
+		const open = (this.state.add || this.state.edit || this.state.view) ? true : false;
+
 		return (
 			<Fragment>
 			<TopBar currentPath={currentPath} />
 			<div className={classes.root}>
-				<Button variant="contained" className={classes.addButton} size="small" onClick={() => { addButton() }}>
-					<Icon>add</Icon> Add
-				</Button>
-				
 				<MUIDataTable
 				title={this.title}
-				data={data}
+				data={this.data}
 				columns={columns}
 				options={options}/>
 				
@@ -169,26 +182,33 @@ class Users extends Component {
 				aria-labelledby="simple-modal-title"
 				aria-describedby="simple-modal-description"
 				open={open}
-				onClose={handleClose}>
+				onClose={this.handleClose}>
 					<div className="modal">
-						{editing ? (
+						{(this.state.edit) ? (
 							<Fragment>
 								<h2 id="simple-modal-title">Edit User</h2>
 								<div id="simple-modal-description">
 									<EditForm
-									editing={editing}
+									editing={this.state.edit}
 									currentEdit={currentEdit}
-									editForm={editForm}/>
+									editForm={this.editForm}/>
+								</div>
+							</Fragment>
+						) : ((this.state.add) ? (
+							<Fragment>
+								<h2 id="simple-modal-title">Add User</h2>
+								<div id="simple-modal-description">
+									<AddForm addForm={this.addForm} />
 								</div>
 							</Fragment>
 						) : (
 							<Fragment>
-								<h2 id="simple-modal-title">Add User</h2>
+								<h2 id="simple-modal-title">View User</h2>
 								<div id="simple-modal-description">
-									<AddForm addForm={addForm} />
+									<ViewForm currentEdit={currentEdit}/>
 								</div>
 							</Fragment>
-						)}	
+						))}	
 					</div>
 				</Modal>
 			</div>
