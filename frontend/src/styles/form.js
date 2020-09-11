@@ -5,10 +5,6 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
-  img {
-    width: 100px;
-    margin: 10px 0 40px;
-  }
   p {
     margin-bottom: 15px;
     padding: 10px;
@@ -27,13 +23,14 @@ export const Form = styled.form`
     }
   }
   button {
-    color: #fff;
-    font-size: 16px;
-    background: #fc6963;
-    height: 56px;
-    border: 0;
-    border-radius: 5px;
-    width: 100%;
+    background-color: #ff6d00 !important;
+    color: #fff !important;
+    border: 1px solid #ff9042 !important;
+    box-shadow: 1px 2px 3px 0px #ff852d !important;
+    padding: 10px 16px;
+    margin-right: 10px;
+    border-radius: 6px;
+    font-weight: 600;
   }
   hr {
     margin: 20px 0;
