@@ -36,13 +36,17 @@ h2, h3 {
 	white-space: nowrap;
 	word-wrap: normal;
 	direction: ltr;
-	-moz-font-feature-settings: 'liga';
 	-moz-osx-font-smoothing: grayscale;
+}
+
+a {
+	color: #fff !important;
 }
 
 a:hover {
     text-decoration: none !important;
-    color: #333 !important;
+	color: #333 !important;
+	border: none !important;
 }
 
 input {
@@ -53,6 +57,13 @@ input {
 input:focus {
     box-shadow: 1px 1px 5px #ff852d !important;
     border: 1px solid #ff9042 !important;
+}
+
+input[type=checkbox], input[type=radio] {
+	opacity: 0 !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin: 8px 4px !important;
 }
 
 button {
@@ -149,7 +160,7 @@ button {
 }
 
 .MuiIconButton-root {
-	padding: 5px 1px !important;
+	padding: 3px !important;
 }
 
 .MuiButtonBase-root path {
@@ -175,6 +186,13 @@ table th:last-child span {
 
 .Mui-selected {
 	color: #000 !important;
+}
+
+.MuiMenu-paper {
+	top: 50px !important;
+	right: 15px !important;
+	left: unset !important;
+	overflow: auto !important;
 }
 
 .MuiMenu-list .Mui-selected {
@@ -234,8 +252,16 @@ table th:last-child span {
 	font-size: 0.75rem !important;
 }
 
+.MuiPopover-paper div, .MuiPopover-paper fieldset {
+	background-color: #252525 !important;
+}
+
 .MuiButton-sizeSmall {
 	padding: 4px 4px !important;
+}
+
+p, label, label span, fieldset span, svg {
+	color: #fff !important;
 }
 
 .modal {
@@ -252,14 +278,7 @@ table th:last-child span {
 	transform: translate(-50%, -50%);
 }
 
-@media (max-width: 740px) {
-	.MuiPaper-root {
-		height: 100%;
-		overflow: auto;
-		max-height: 499px;
-		overflow-x: auto;
-	}
-
+@media (max-width: 650px) {
 	.modal {
 		width: 80%;
 	}
