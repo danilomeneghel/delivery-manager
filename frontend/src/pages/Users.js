@@ -18,6 +18,7 @@ class Users extends Component {
 		this.title = 'Users List';
 		this.state = { add: false, edit: false, view: false };	
 		this.array = [];
+		this.data = [];
 	}
 	
 	componentDidMount() {
@@ -45,56 +46,35 @@ class Users extends Component {
 		this.setState({ add: false, edit: false, view: false });
 	};
 	
-	addButton = () => {
+	addItem = () => {
 		this.handleAdd();
 	};
 	
 	addForm = item => {
-		item._id = this.array.length + 1;
-		const items = [
-			item.name, 
-			item.username, 
-			item.email, 
-			item.role, 
-			item.status, 
-			''];
-		this.setState({ array: this.array.concat([items]) });
+		this.setState({ array: this.array.concat([Object.values(item)]) });
 		this.handleClose();
 	};
 
-	editButton = item => {
-		this.setState({ arrayEdit: {
-			name: item[0], 
-			username: item[1], 
-			email: item[2], 
-			role: item[3], 
-			status: item[4], 
+	editItem = item => {
+		this.setState({ arrayItems: {
+			_id: item[0], 
+			name: item[1], 
+			username: item[2], 
+			email: item[3], 
+			role: item[4], 
+			status: item[5], 
 			action: ''} 
 		});
 		this.handleEdit();
 	};
 	
 	editForm = (_id, item) => {
-		const items = [
-			item.name, 
-			item.username, 
-			item.email, 
-			item.role, 
-			item.status, 
-			''];
-		this.setState({ array: this.array.map(result => (result[0] === _id ? items : result)) });
+		this.setState({ array: this.data.map(result => (result[0] === _id ? Object.values(item) : result)) });
 		this.handleClose();
 	};
 	
-	viewButton = item => {
-		this.setState({ arrayView: {
-			name: item[0], 
-			username: item[1], 
-			email: item[2], 
-			role: item[3], 
-			status: item[4], 
-			action: ''} 
-		});
+	viewItem = item => {
+		this.editItem(item);
 		this.handleView();
 	};
 
@@ -104,15 +84,20 @@ class Users extends Component {
 
 		if(!!this.state.results) {
 			this.array = this.state.results.map(result => [
+				result._id, 
 				result.name, 
 				result.username, 
 				result.email, 
 				result.role, 
 				result.status, 
-				'']);
+				'']
+			);
 		}
-				
+		
+		this.data = (!!this.state.array) ? this.state.array : this.array;
+		
 		const columns = [
+			{ name: 'ID', options: {display: false, filter: false} },
 			{ name: 'Name', options: {filter: true} },
 			{ name: 'Username', options: {filter: true} },
 			{ name: 'E-mail', options: {filter: true} },
@@ -124,10 +109,10 @@ class Users extends Component {
 					customBodyRender: (value, tableMeta, updateValue) => {
 					return (
 						<Fragment>
-							<Button variant="contained" className={classes.viewButton} size="small" onClick={() => {this.viewButton(tableMeta.rowData)}}>
+							<Button variant="contained" className={classes.viewButton} size="small" onClick={() => {this.viewItem(tableMeta.rowData)}}>
 								<Icon>visibility</Icon> View
 							</Button>
-							<Button variant="contained" className={classes.editButton} size="small" onClick={() => {this.editButton(tableMeta.rowData)}}>
+							<Button variant="contained" className={classes.editButton} size="small" onClick={() => {this.editItem(tableMeta.rowData)}}>
 								<Icon>edit</Icon> Edit
 							</Button>
 						</Fragment>
@@ -139,13 +124,13 @@ class Users extends Component {
 		
 		const options = {
 			filter: true,
-			selectableRows: true,
+			multiple: true,
 			filterType: 'dropdown',
-			responsive: 'stacked',
+			responsive: 'vertical',
 			rowsPerPage: 10,
 			customToolbar: () => {
 			  return (
-				<CustomToolbar addButton={this.addButton} />
+				<CustomToolbar addItem={this.addItem} />
 			  );
 			}
 		};
@@ -159,7 +144,7 @@ class Users extends Component {
 			<div className={classes.root}>
 				<MUIDataTable
 				title={this.title}
-				data={this.array}
+				data={this.data}
 				columns={columns}
 				options={options}/>
 				
@@ -175,7 +160,7 @@ class Users extends Component {
 								<div id="simple-modal-description">
 									<EditForm
 									editing={this.state.edit}
-									currentEdit={this.state.arrayEdit}
+									currentEdit={this.state.arrayItems}
 									editForm={this.editForm}/>
 								</div>
 							</Fragment>
@@ -190,7 +175,7 @@ class Users extends Component {
 							<Fragment>
 								<h2 id="simple-modal-title">View User</h2>
 								<div id="simple-modal-description">
-									<ViewForm currentView={this.state.arrayView}/>
+									<ViewForm currentView={this.state.arrayItems}/>
 								</div>
 							</Fragment>
 						))}	

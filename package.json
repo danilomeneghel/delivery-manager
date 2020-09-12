@@ -5,8 +5,8 @@
   "author": "Danilo Meneghel",
   "license": "MIT",
   "scripts": {
-    "client": "cd frontend && npm install && npm start",
-    "server": "cd backend && npm install && npm start",
+    "client": "cd frontend && npm start",
+    "server": "cd backend && npm start",
     "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {

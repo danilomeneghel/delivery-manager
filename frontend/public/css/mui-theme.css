@@ -151,7 +151,8 @@ button {
 }
 
 .MuiDrawer-root .MuiDrawer-paperAnchorLeft {
-    background-color: #ff6d00eb !important;
+	background-color: #ff6d00eb !important;
+	min-width: 45% !important;
 }
 
 .MuiTypography-h6 {
