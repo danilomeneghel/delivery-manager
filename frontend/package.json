@@ -1,7 +1,9 @@
 {
   "name": "react-material-ui",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.1",
+  "description": "CRUD complete in ReactJS with MUI-DataTables",
+  "author": "Danilo Meneghel",
+  "license": "MIT",
   "main": "index.js",
   "dependencies": {
     "@material-ui/core": "4.1.2",

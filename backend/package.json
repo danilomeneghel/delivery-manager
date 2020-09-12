@@ -1,8 +1,8 @@
 {
   "name": "crud-nodejs-mongodb",
   "version": "1.0.1",
-  "description": "CRUD complete in NodeJS with Express, Passport e MongoDB",
   "main": "app.js",
+  "description": "CRUD complete in NodeJS with Express, Passport and MongoDB",
   "author": "Danilo Meneghel",
   "license": "MIT",
   "dependencies": {
@@ -29,10 +29,5 @@
   "devDependencies": {},
   "scripts": {
     "start": "node app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "ssh://git@github.com/danilomeneghel/crud-nodejs-mongodb.git",
-    "directory": "crud-nodejs-mongodb"
   }
 }
