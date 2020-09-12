@@ -117,7 +117,7 @@ class TopBar extends Component {
                   </div>
                   <div className={classes.tabContainer}>
                     <SwipeableDrawer
-                      anchor="right"
+                      anchor="left"
                       open={this.state.menuDrawer}
                       onClose={this.mobileMenuClose}
                       onOpen={this.mobileMenuOpen}

@@ -49,6 +49,10 @@ a:hover {
 	border: none !important;
 }
 
+p, label, label span, fieldset span, svg {
+	color: #fff !important;
+}
+
 input {
 	background-color: #121212 !important;
 	color: #fff !important;
@@ -144,6 +148,10 @@ button {
 
 .content{
     color: #fff !important;
+}
+
+.MuiDrawer-root .MuiDrawer-paperAnchorLeft {
+    background-color: #ff6d00eb !important;
 }
 
 .MuiTypography-h6 {
@@ -258,10 +266,6 @@ table th:last-child span {
 
 .MuiButton-sizeSmall {
 	padding: 4px 4px !important;
-}
-
-p, label, label span, fieldset span, svg {
-	color: #fff !important;
 }
 
 .modal {
