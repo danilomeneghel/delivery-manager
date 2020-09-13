@@ -2,11 +2,22 @@ const user = require('../controllers/user')
 
 module.exports = (app) => {
 
+    //API
     app.route('/users-list')
-        .get(user.users)
+        .get(user.usersList)
     
+    app.route('/user-create')
+        .post(user.userCreate)
+    
+    app.route('/user-update/:id')
+        .post(user.userUpdate)
+    
+    app.route('/user-remove/:id')
+        .get(user.userRemove)
+    
+    //Local
     app.route('/users')
-        .get(user.isLoggedIn, user.userList)
+        .get(user.isLoggedIn, user.users)
 
     app.route('/user-add')
         .get(user.isLoggedIn, user.pageAdd)

@@ -51,7 +51,12 @@ class Users extends Component {
 	};
 	
 	addForm = item => {
-		this.setState({ array: this.array.concat([Object.values(item)]) });
+		console.log("item= ", item)
+		api.post('/user-create', { item })
+		.then(response => {
+			if(response.data)
+				this.setState({ array: this.array.concat([Object.values(item)]) });
+		});
 		this.handleClose();
 	};
 
@@ -69,7 +74,11 @@ class Users extends Component {
 	};
 	
 	editForm = (_id, item) => {
-		this.setState({ array: this.data.map(result => (result[0] === _id ? Object.values(item) : result)) });
+		api.put('/user-update/'+_id, { item })
+		.then(response => {
+			if(response.data)
+				this.setState({ array: this.data.map(result => (result[0] === _id ? Object.values(item) : result)) });
+		});
 		this.handleClose();
 	};
 	
@@ -135,12 +144,11 @@ class Users extends Component {
 			}
 		};
 		
-		const currentPath = this.props.location.pathname;
 		const open = (this.state.add || this.state.edit || this.state.view) ? true : false;
 
 		return (
 			<Fragment>
-			<TopBar currentPath={currentPath} />
+			<TopBar />
 			<div className={classes.root}>
 				<MUIDataTable
 				title={this.title}

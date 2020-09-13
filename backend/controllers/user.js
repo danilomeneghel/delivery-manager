@@ -4,7 +4,7 @@ const passport = require("passport"),
 
 var ObjectId = mongoose.Types.ObjectId
 
-exports.users = (req, res) => {
+exports.usersList = (req, res) => {
     User.find()
     .exec((err, results) => {
         if (err) return res.send(err)
@@ -13,7 +13,43 @@ exports.users = (req, res) => {
     })
 }
 
-exports.userList = (req, res) => {
+exports.userCreate = (req, res) => {
+    User.create(req.body.item)
+    .then((result) => {
+        if (!result) return res.status(400).json(false)
+
+        res.status(201).json(true)
+    })
+}
+
+exports.userUpdate = (req, res) => {
+    User.updateOne({_id: ObjectId(req.params.id)}, {
+        $set: {
+            name: req.body.item.name,
+            email: req.body.item.email,
+            username: req.body.item.username,
+            password: req.body.item.password,
+            role: req.body.item.role,
+            status: req.body.item.status,
+        }
+    })
+    .then((result) => {
+        if (!result) return res.status(400).json(false)
+        
+        res.status(201).json(true)
+    })
+}
+
+exports.userRemove = (req, res) => {
+    User.deleteOne({_id: ObjectId(req.params.id)}, 
+    (err) => {
+        if (err) return res.status(400).json(false)
+
+        res.status(200).json(true)
+    })
+}
+
+exports.users = (req, res) => {
     User.find()
     .exec((err, results) => {
         if (err) return res.send(err)

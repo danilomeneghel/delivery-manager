@@ -81,7 +81,7 @@ class TopBar extends Component {
   tabCurrent = () => {
     var current = 0;
     this.menuLinks.forEach((item, index) => {
-      if (item.pathname === this.props.currentPath) 
+      if (item.pathname === this.props.location.pathname) 
         current = item.value;
     });
     return current;

@@ -57,6 +57,7 @@ input {
 	background-color: #121212 !important;
 	color: #fff !important;
 	border: none !important;
+	padding: 0px 10px !important;
 }
 input:focus {
     box-shadow: 1px 1px 5px #ff852d !important;
@@ -68,6 +69,12 @@ input[type=checkbox], input[type=radio] {
     width: 16px !important;
     height: 16px !important;
     margin: 8px 4px !important;
+}
+
+select {
+	background-color: #121212 !important;
+	color: #fff !important;
+	padding: 0px 10px !important;
 }
 
 button {

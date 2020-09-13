@@ -20,20 +20,31 @@ const EditForm = props => {
 			props.editForm(item._id, item)
 		  }}
 		>
-			<label>Nome</label>
+			<label>Name</label><br />
 			<input type="text" name="name" value={item.name} onChange={handleInputChange} /><br />
 
-			<label>Usuario</label>
+			<label>Username</label><br />
 			<input type="text" name="username" value={item.username} onChange={handleInputChange} /><br />
 
-			<label>E-mail</label>
+			<label>E-mail</label><br />
 			<input type="text" name="email" value={item.email} onChange={handleInputChange} /><br />
 
-			<label>Role</label>
-			<input type="text" name="role" value={item.role} onChange={handleInputChange} /><br />
+			<label>Password</label><br />
+			<input type="text" name="password" value={item.password} onChange={handleInputChange} /><br />
 			
-			<label>Status</label>
-			<input type="text" name="status" value={item.status} onChange={handleInputChange} /><br /><br />
+			<label>Role</label><br />
+			<select name="role" value={item.role} onChange={handleInputChange}>
+				<option value="0" disabled="disabled">Role</option>
+				<option value="admin">Admin</option>
+				<option value="user">User</option>
+			</select><br />
+
+			<label>Status</label><br />
+			<select name="status" value={item.status} onChange={handleInputChange}>
+				<option value="0" disabled="disabled">Status</option>
+				<option value="active">Active</option>
+				<option value="inactive">Inactive</option>
+			</select><br /><br />
 
 			<button type="reset"><i className="fa fa-close"></i> Cancel</button> 
 			<button type="submit"><i className="fa fa-hdd-o"></i> Save</button>
