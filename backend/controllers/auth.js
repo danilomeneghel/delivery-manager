@@ -91,32 +91,26 @@ exports.pageRegister = (req, res) => {
     res.render("login", { message: {} })
 }
 
-exports.addRegister = (req,res) => {
-    User.register(new User({
-        name: req.body.name,
-        email: req.body.email,
-        username: req.body.username,
-        role: "user",
-        status: "active"
-    }), req.body.password, 
-    (err) => {
-        if(err) return res.redirect('?error=' + err.message)
+exports.addRegister = (req, res) => {
+    User.create(req.body)
+    .then((result) => {
+        if(result) return res.redirect('?error=' + result)
 
         res.render("login", { message: {'success': 'User successfully registered!'} })
+    })
+    .catch(err => {
+        return res.redirect('?error=' + err)
     })
 }
 
 exports.signUp = (req, res) => {
-    User.register(new User({
-        name: req.body.name,
-        email: req.body.email,
-        username: req.body.username,
-        role: "user",
-        status: "active"
-    }), req.body.password, 
-    (err, user) => {
-        if(err) res.status(401).json(err.message)
+    User.create(req.body)
+    .then((result) => {
+        if (!result) return res.status(400).json({ error: result })
 
-        res.status(200).json({ success: 'User successfully registered!' });
+        res.status(201).json({ success: 'User successfully registered!' });
+    })
+    .catch(err => {
+        return res.status(400).json({ error: err })
     })
 }

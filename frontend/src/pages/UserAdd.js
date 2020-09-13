@@ -19,16 +19,16 @@ const AddForm = props => {
 			}}
 		>
 			<label>Name: </label><br />
-			<input type="text" name="name" value={item.name} onChange={handleInputChange}/><br />
+			<input type="text" name="name" value={item.name} onChange={handleInputChange} required /><br />
 
 			<label>Username: </label><br />
-			<input type="text" name="username" value={item.username} onChange={handleInputChange}/><br />
+			<input type="text" name="username" value={item.username} onChange={handleInputChange} required /><br />
 
 			<label>E-mail: </label><br />
-			<input type="text" name="email" value={item.email} onChange={handleInputChange}/><br />
+			<input type="email" name="email" value={item.email} onChange={handleInputChange} required /><br />
 
 			<label>Password</label><br />
-			<input type="text" name="password" value={item.password} onChange={handleInputChange} /><br />
+			<input type="text" name="password" value={item.password} onChange={handleInputChange} required /><br />
 			
 			<label>Role</label><br />
 			<select name="role" onChange={handleInputChange}>

@@ -51,7 +51,6 @@ class Users extends Component {
 	};
 	
 	addForm = item => {
-		console.log("item= ", item)
 		api.post('/user-create', { item })
 		.then(response => {
 			if(response.data)
@@ -74,7 +73,7 @@ class Users extends Component {
 	};
 	
 	editForm = (_id, item) => {
-		api.put('/user-update/'+_id, { item })
+		api.post('/user-update/'+_id, { item })
 		.then(response => {
 			if(response.data)
 				this.setState({ array: this.data.map(result => (result[0] === _id ? Object.values(item) : result)) });

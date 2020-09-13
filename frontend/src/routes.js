@@ -27,9 +27,9 @@ export default props => (
   <BrowserRouter>
       <Switch>
         <Route exact path="/login" component={Login} />
-        <Redirect exact from="/logout" to="/login" component={logout} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/logout" component={logout} />
         <PrivateRoute exact path='/' component={ Home } />
         <PrivateRoute exact path='/orders' component={ Orders } />
         <PrivateRoute exact path='/products' component={ Products } />

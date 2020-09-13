@@ -4,6 +4,7 @@ import api from "../services/api";
 import { Form, Container } from "../styles/form";
 
 class SignUp extends Component {
+  
   state = {
     name: "",
     email: "",
@@ -22,12 +23,16 @@ class SignUp extends Component {
       this.setState({ error: "Fill in all the data to register" });
     } else {
       try {
-        await api.post("/register", { name, username, email, password, role, status });
-        this.setState({ success: "User successfully registered!" });
-        this.props.history.push("/signUp");
+        await api.post("/signUp", { name, username, email, password, role, status })
+        .then(response => {
+          console.log("response ", response)
+          this.setState({ success: response.data.success, error: "" });
+          if(response.success)
+            this.props.history.push("/");
+        });
       } catch (err) {
         console.log(err);
-        this.setState({ error: "Error registering" });
+        this.setState({ error: "Error registering", success: "" });
       }
     }
   };
@@ -36,6 +41,7 @@ class SignUp extends Component {
     return (
       <Container>
         <Form onSubmit={this.handleSignUp}>
+          {console.log("statee: ",this.state)}
           {this.state.success && <p>{this.state.success}</p>}
           {this.state.error && <p>{this.state.error}</p>}
           <i className="fa fa-user-circle"></i>
