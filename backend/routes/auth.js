@@ -3,11 +3,16 @@ const auth = require('../controllers/auth'),
 
 module.exports = (app) => {
 
+    //API
+    app.route('/signIn')
+    .post(auth.signIn)
+    
+    app.route('/signUp')
+    .post(auth.signUp)
+    
+    //Local
     app.route('/')
         .get(user.isLoggedIn, auth.index)
-    
-    app.route('/signIn')
-        .post(auth.signIn)
     
 	app.route('/login')
         .get(auth.login)
@@ -20,8 +25,5 @@ module.exports = (app) => {
         .get(auth.pageRegister)
         .post(auth.addRegister)
 
-    app.route('/signUp')
-        .post(auth.signUp)
-    
     return app
 }

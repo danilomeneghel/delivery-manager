@@ -22,18 +22,18 @@ class SignUp extends Component {
     if (!username || !email || !password) {
       this.setState({ error: "Fill in all the data to register" });
     } else {
-      try {
-        await api.post("/signUp", { name, username, email, password, role, status })
-        .then(response => {
-          console.log("response ", response)
+      await api.post("/signUp", { name, username, email, password, role, status })
+      .then(response => {
+        if(response.data.success) {
           this.setState({ success: response.data.success, error: "" });
-          if(response.success)
-            this.props.history.push("/");
-        });
-      } catch (err) {
-        console.log(err);
-        this.setState({ error: "Error registering", success: "" });
-      }
+          this.props.history.push("/");
+        } else {
+          this.setState({ error: "Registration error", success: "" });
+        }
+      })
+      .catch(err => {
+        this.setState({ error: "Registration error or User already registered", success: "" });
+      })
     }
   };
 
@@ -41,7 +41,6 @@ class SignUp extends Component {
     return (
       <Container>
         <Form onSubmit={this.handleSignUp}>
-          {console.log("statee: ",this.state)}
           {this.state.success && <p>{this.state.success}</p>}
           {this.state.error && <p>{this.state.error}</p>}
           <i className="fa fa-user-circle"></i>

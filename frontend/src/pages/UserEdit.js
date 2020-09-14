@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Form } from "../styles/form";
+import api from "../services/api";
 
 const EditForm = props => {
 	const [ item, setForm ] = useState(props.currentEdit)
+	const [ msg, setMsg ] = useState({})
+
+	console.log("item ", item)
+	console.log("currentEdit ", props.currentEdit)
 
 	useEffect( () => { setForm(props.currentEdit) },
 		[ props ]
@@ -13,13 +18,31 @@ const EditForm = props => {
 		setForm({ ...item, [name]: value })
 	}
 
+	const sendItem = (_id, item) => {
+		api.post('/user-update/'+_id, { item })
+		.then(response => {
+			if(response.data.success) {
+				setMsg({ success: response.data.success, error: "" });
+				props.editForm(item._id, item)
+			} else {
+				setMsg({ error: "Registration error", success: "" });
+			}
+		})
+		.catch(err => {
+			setMsg({ error: "Registration error", success: "" });
+		})
+	}
+
 	return (
 		<Form
 		  onSubmit={event => {
 			event.preventDefault()
-			props.editForm(item._id, item)
+			sendItem(item._id, item)
 		  }}
 		>
+			{msg.success && <p>{msg.success}</p>}
+          	{msg.error && <p>{msg.error}</p>}
+			
 			<label>Name</label><br />
 			<input type="text" name="name" value={item.name} onChange={handleInputChange} required /><br />
 
@@ -33,15 +56,15 @@ const EditForm = props => {
 			<input type="text" name="password" value={item.password} onChange={handleInputChange} required /><br />
 			
 			<label>Role</label><br />
-			<select name="role" value={item.role} onChange={handleInputChange}>
-				<option value="0" disabled="disabled">Role</option>
+			<select name="role" value={item.role} onChange={handleInputChange} required>
+				<option value="">Role</option>
 				<option value="admin">Admin</option>
 				<option value="user">User</option>
 			</select><br />
 
 			<label>Status</label><br />
-			<select name="status" value={item.status} onChange={handleInputChange}>
-				<option value="0" disabled="disabled">Status</option>
+			<select name="status" value={item.status} onChange={handleInputChange} required>
+				<option value="">Status</option>
 				<option value="active">Active</option>
 				<option value="inactive">Inactive</option>
 			</select><br /><br />

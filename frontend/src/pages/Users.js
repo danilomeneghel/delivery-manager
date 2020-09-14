@@ -51,11 +51,7 @@ class Users extends Component {
 	};
 	
 	addForm = item => {
-		api.post('/user-create', { item })
-		.then(response => {
-			if(response.data)
-				this.setState({ array: this.array.concat([Object.values(item)]) });
-		});
+		this.setState({ array: this.data.concat([Object.values(item)]) });
 		this.handleClose();
 	};
 
@@ -73,11 +69,7 @@ class Users extends Component {
 	};
 	
 	editForm = (_id, item) => {
-		api.post('/user-update/'+_id, { item })
-		.then(response => {
-			if(response.data)
-				this.setState({ array: this.data.map(result => (result[0] === _id ? Object.values(item) : result)) });
-		});
+		this.setState({ array: this.data.map(result => (result[0] === _id ? Object.values(item) : result)) });
 		this.handleClose();
 	};
 	

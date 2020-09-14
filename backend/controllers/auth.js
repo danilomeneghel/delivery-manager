@@ -52,15 +52,24 @@ exports.signIn = (req, res) => {
         if (err) res.status(404).json(err)
 
         if (user) {
-            const token = jwt.sign(user.toJSON(), '#delivery@token', { expiresIn: 604800 });
-            res.status(200).json({
-                user: { "username": user.username, "role": user.role, "status": user.status },
-                token: token
-            });
+            const token = jwt.sign(user.toJSON(), '#delivery@token', { expiresIn: 604800 })
+            res.status(200).json({ token: token })
         } else {
             res.status(401).json(info)
         }
 	})(req, res)
+}
+
+exports.signUp = (req, res) => {
+    User.create(req.body)
+    .then((result) => {
+        if (!result) return res.status(400).json({ error: result })
+
+        res.status(201).json({ result: result, success: 'User successfully registered!' })
+    })
+    .catch(err => {
+        return res.status(400).json({ error: err })
+    })
 }
 
 exports.auth = (req, res, next) => { 
@@ -100,17 +109,5 @@ exports.addRegister = (req, res) => {
     })
     .catch(err => {
         return res.redirect('?error=' + err)
-    })
-}
-
-exports.signUp = (req, res) => {
-    User.create(req.body)
-    .then((result) => {
-        if (!result) return res.status(400).json({ error: result })
-
-        res.status(201).json({ success: 'User successfully registered!' });
-    })
-    .catch(err => {
-        return res.status(400).json({ error: err })
     })
 }

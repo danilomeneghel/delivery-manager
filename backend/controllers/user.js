@@ -16,9 +16,9 @@ exports.usersList = (req, res) => {
 exports.userCreate = (req, res) => {
     User.create(req.body.item)
     .then((result) => {
-        if (!result) return res.status(400).json(false)
+        if (!result) return res.status(400).json({ error: result })
 
-        res.status(201).json(true)
+        res.status(201).json({ result: result, success: 'User successfully registered!' })
     })
     .catch(err => {
         return res.status(400).json({ error: err })
@@ -39,7 +39,10 @@ exports.userUpdate = (req, res) => {
     .then((result) => {
         if (!result) return res.status(400).json(false)
         
-        res.status(201).json(true)
+        res.status(201).json({ result: result, success: 'User successfully registered!' })
+    })
+    .catch(err => {
+        return res.status(400).json({ error: err })
     })
 }
 
@@ -100,6 +103,9 @@ exports.userEdit = (req, res) => {
 
             res.redirect("/users")
         })
+    })
+    .catch(err => {
+        return res.render('user-edit', { message: {'error': err} }) 
     })
 }
 

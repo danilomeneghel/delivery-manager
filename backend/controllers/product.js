@@ -32,6 +32,9 @@ exports.productAdd = (req, res) => {
 
         res.redirect('/products')
     })
+    .catch(err => {
+        return res.render('product-add', { message: {'error': err} }) 
+    })
 }
 
 exports.pageEdit = (req, res) => {
@@ -55,6 +58,9 @@ exports.productEdit = (req, res) => {
         if (!result) return res.render('product-edit', { message: {'error': result} }) 
         
         res.redirect('/products')
+    })
+    .catch(err => {
+        return res.render('product-edit', { message: {'error': err} }) 
     })
 }
 

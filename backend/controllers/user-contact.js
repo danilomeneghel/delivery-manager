@@ -41,6 +41,9 @@ exports.userContactAdd = (req, res) => {
 
         res.redirect('/users-contacts')
     })
+    .catch(err => {
+        return res.render('user-contact-add', { message: {'error': err} }) 
+    })
 }
 
 exports.pageEdit = (req, res) => {
@@ -78,6 +81,9 @@ exports.userContactEdit = (req, res) => {
         if (!result) return res.render('user-contact-edit', { message: {'error': result} }) 
         
         res.redirect('/users-contacts')
+    })
+    .catch(err => {
+        return res.render('user-contact-edit', { message: {'error': err} }) 
     })
 }
 

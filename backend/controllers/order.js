@@ -56,6 +56,9 @@ exports.orderAdd = (req, res) => {
 
         res.redirect('/orders')
     })
+    .catch(err => {
+        return res.render('order-add', { message: {'error': err} }) 
+    })
 }
 
 exports.pageEdit = (req, res) => {
@@ -101,6 +104,9 @@ exports.orderEdit = (req, res) => {
         if (!result) return res.render('order-edit', { message: {'error': result} }) 
         
         res.redirect('/orders')
+    })
+    .catch(err => {
+        return res.render('order-edit', { message: {'error': err} }) 
     })
 }
 
