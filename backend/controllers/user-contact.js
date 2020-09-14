@@ -5,9 +5,8 @@ const UserContact = require("../models/user-contact"),
 
 var ObjectId = mongoose.Types.ObjectId
 
-exports.usersContacts = (req, res) => {
+exports.usersList = (req, res) => {
     UserContact.find()
-    .populate('user')
     .exec((err, results) => {
         if (err) return res.send(err)
 
@@ -15,7 +14,52 @@ exports.usersContacts = (req, res) => {
     })
 }
 
-exports.userContactList = (req, res) => {
+exports.userContactCreate = (req, res) => {
+    UserContact.create(req.body.item)
+    .then((result) => {
+        if (!result) return res.status(400).json({ error: result })
+
+        res.status(201).json({ result: result, success: 'User Contact successfully created!' })
+    })
+    .catch(err => {
+        return res.status(400).json({ error: err })
+    })
+}
+
+exports.userContactUpdate = (req, res) => {
+    UserContact.updateOne({_id: ObjectId(req.params.id)}, {
+        $set: {
+            name: req.body.item.name,
+            email: req.body.item.email,
+            username: req.body.item.username,
+            password: req.body.item.password,
+            role: req.body.item.role,
+            status: req.body.item.status
+        }
+    })
+    .then((result) => {
+        if (!result) return res.status(400).json(false)
+        
+        res.status(201).json({ result: result, success: 'User Contact successfully changed!' })
+    })
+    .catch(err => {
+        return res.status(400).json({ error: err })
+    })
+}
+
+exports.userContactRemove = (req, res) => {
+    UserContact.deleteOne({_id: ObjectId(req.params.id)}, 
+    (err) => {
+        if (err) return res.status(400).json(false)
+
+        res.status(200).json({ success: 'User Contact successfully removed!' })
+    })
+    .catch(err => {
+        return res.status(400).json({ error: err })
+    })
+}
+
+exports.usersContacts = (req, res) => {
     UserContact.find()
     .populate('user')
     .exec((err, results) => {

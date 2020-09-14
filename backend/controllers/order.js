@@ -6,7 +6,7 @@ const Order = require("../models/order"),
 
 var ObjectId = mongoose.Types.ObjectId
 
-exports.orders = (req, res) => {
+exports.ordersList = (req, res) => {
     Order.find()
     .populate('user')
     .populate('product')
@@ -17,7 +17,51 @@ exports.orders = (req, res) => {
     })
 }
 
-exports.orderList = async (req, res) => {
+exports.orderCreate = (req, res) => {
+    Order.create(req.body.item)
+    .then((result) => {
+        if (!result) return res.status(400).json({ error: result })
+
+        res.status(201).json({ result: result, success: 'Order successfully created!' })
+    })
+    .catch(err => {
+        return res.status(400).json({ error: err })
+    })
+}
+
+exports.orderUpdate = (req, res) => {
+    Order.updateOne({_id: ObjectId(req.params.id)}, {
+        $set: {
+            user: req.body.item.user,
+            product: req.body.item.product,
+            quantity: req.body.item.quantity,
+            deliveryDate: req.body.item.deliveryDate,
+            note: req.body.item.note
+        }
+    })
+    .then((result) => {
+        if (!result) return res.status(400).json(false)
+        
+        res.status(201).json({ result: result, success: 'Order successfully changed!' })
+    })
+    .catch(err => {
+        return res.status(400).json({ error: err })
+    })
+}
+
+exports.orderRemove = (req, res) => {
+    Order.deleteOne({_id: ObjectId(req.params.id)}, 
+    (err) => {
+        if (err) return res.status(400).json(false)
+
+        res.status(200).json({ success: 'Order successfully removed!' })
+    })
+    .catch(err => {
+        return res.status(400).json({ error: err })
+    })
+}
+
+exports.orders = async (req, res) => {
     Order.find()
     .populate('user')
     .populate('product')

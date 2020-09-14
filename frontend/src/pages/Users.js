@@ -15,7 +15,7 @@ class Users extends Component {
 	constructor (props) {
 		super(props);
 
-		this.title = 'Users List';
+		this.title = 'Users';
 		this.state = { add: false, edit: false, view: false };	
 		this.array = [];
 		this.data = [];
@@ -142,7 +142,7 @@ class Users extends Component {
 			<TopBar />
 			<div className={classes.root}>
 				<MUIDataTable
-				title={this.title}
+				title={this.title + " List"}
 				data={this.data}
 				columns={columns}
 				options={options}/>
@@ -155,7 +155,7 @@ class Users extends Component {
 					<div className="modal">
 						{(this.state.edit) ? (
 							<Fragment>
-								<h2 id="simple-modal-title">Edit User</h2>
+								<h2 id="simple-modal-title">Edit {this.title}</h2>
 								<div id="simple-modal-description">
 									<EditForm
 									editing={this.state.edit}
@@ -165,14 +165,14 @@ class Users extends Component {
 							</Fragment>
 						) : ((this.state.add) ? (
 							<Fragment>
-								<h2 id="simple-modal-title">Add User</h2>
+								<h2 id="simple-modal-title">Add {this.title}</h2>
 								<div id="simple-modal-description">
 									<AddForm addForm={this.addForm} />
 								</div>
 							</Fragment>
 						) : (
 							<Fragment>
-								<h2 id="simple-modal-title">View User</h2>
+								<h2 id="simple-modal-title">View {this.title}</h2>
 								<div id="simple-modal-description">
 									<ViewForm currentView={this.state.arrayItems}/>
 								</div>

@@ -3,7 +3,7 @@ const Product = require("../models/product"),
 
 var ObjectId = mongoose.Types.ObjectId
 
-exports.products = (req, res) => {
+exports.productsList = (req, res) => {
     Product.find()
     .exec((err, results) => {
         if (err) return res.send(err)
@@ -12,7 +12,49 @@ exports.products = (req, res) => {
     })
 }
 
-exports.productList = (req, res) => {
+exports.productCreate = (req, res) => {
+    Product.create(req.body.item)
+    .then((result) => {
+        if (!result) return res.status(400).json({ error: result })
+
+        res.status(201).json({ result: result, success: 'Product successfully created!' })
+    })
+    .catch(err => {
+        return res.status(400).json({ error: err })
+    })
+}
+
+exports.productUpdate = (req, res) => {
+    Product.updateOne({_id: ObjectId(req.params.id)}, {
+        $set: {
+            name: req.body.item.name,
+            price: req.body.item.price,
+            description: req.body.item.description
+        }
+    })
+    .then((result) => {
+        if (!result) return res.status(400).json(false)
+        
+        res.status(201).json({ result: result, success: 'Product successfully changed!' })
+    })
+    .catch(err => {
+        return res.status(400).json({ error: err })
+    })
+}
+
+exports.productRemove = (req, res) => {
+    Product.deleteOne({_id: ObjectId(req.params.id)}, 
+    (err) => {
+        if (err) return res.status(400).json(false)
+
+        res.status(200).json({ success: 'Product successfully removed!' })
+    })
+    .catch(err => {
+        return res.status(400).json({ error: err })
+    })
+}
+
+exports.products = (req, res) => {
     Product.find()
     .exec((err, results) => {
         if (err) return res.send(err)

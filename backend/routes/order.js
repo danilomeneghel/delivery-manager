@@ -3,11 +3,22 @@ const order = require('../controllers/order'),
 
 module.exports = (app) => {
 
+    //API
     app.route('/orders-list')
-        .get(order.orders)
+        .get(user.ordersList)
     
+    app.route('/order-create')
+        .post(user.orderCreate)
+    
+    app.route('/order-update/:id')
+        .post(user.orderUpdate)
+    
+    app.route('/order-remove/:id')
+        .get(user.orderRemove)
+    
+    //Local
     app.route('/orders')
-        .get(user.isLoggedIn, order.orderList)
+        .get(user.isLoggedIn, order.orders)
 
     app.route('/order-add')
         .get(user.isLoggedIn, order.pageAdd)

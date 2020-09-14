@@ -18,7 +18,7 @@ exports.userCreate = (req, res) => {
     .then((result) => {
         if (!result) return res.status(400).json({ error: result })
 
-        res.status(201).json({ result: result, success: 'User successfully registered!' })
+        res.status(201).json({ result: result, success: 'User successfully created!' })
     })
     .catch(err => {
         return res.status(400).json({ error: err })
@@ -39,7 +39,7 @@ exports.userUpdate = (req, res) => {
     .then((result) => {
         if (!result) return res.status(400).json(false)
         
-        res.status(201).json({ result: result, success: 'User successfully registered!' })
+        res.status(201).json({ result: result, success: 'User successfully changed!' })
     })
     .catch(err => {
         return res.status(400).json({ error: err })
@@ -51,7 +51,10 @@ exports.userRemove = (req, res) => {
     (err) => {
         if (err) return res.status(400).json(false)
 
-        res.status(200).json(true)
+        res.status(200).json({ success: 'User successfully removed!' })
+    })
+    .catch(err => {
+        return res.status(400).json({ error: err })
     })
 }
 

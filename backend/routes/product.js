@@ -3,11 +3,22 @@ const product = require('../controllers/product'),
 
 module.exports = (app) => {
 
+    //API
     app.route('/products-list')
-        .get(product.products)
+        .get(user.productsList)
     
+    app.route('/product-create')
+        .post(user.productCreate)
+    
+    app.route('/product-update/:id')
+        .post(user.productUpdate)
+    
+    app.route('/product-remove/:id')
+        .get(user.productRemove)
+    
+    //Local    
     app.route('/products')
-        .get(user.isLoggedIn, product.productList)
+        .get(user.isLoggedIn, product.products)
 
     app.route('/product-add')
         .get(user.isLoggedIn, product.pageAdd)
