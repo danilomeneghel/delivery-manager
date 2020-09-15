@@ -9,7 +9,7 @@ const ViewForm = props => {
 	return (
 		<Fragment>
 			<label>User:&nbsp;</label>
-			{item.user.name}<br />
+			{item.user}<br />
 
 			<label>Address:&nbsp;</label>
 			{item.address}<br />

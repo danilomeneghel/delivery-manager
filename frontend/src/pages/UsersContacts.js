@@ -54,6 +54,10 @@ class UsersContacts extends Component {
 	};
 	
 	addForm = item => {
+		this.state.users.forEach((value) => {
+			if (value._id === item.user) 
+				item.user = value.name;
+		});
 		this.setState({ array: this.data.concat([Object.values(item)]) });
 		this.handleClose();
 	};
@@ -61,7 +65,7 @@ class UsersContacts extends Component {
 	editItem = item => {
 		var userSelected = null;
 		this.state.users.forEach((value) => {
-			if (value.name == item[1]) 
+			if (value.name === item[1]) 
 				userSelected = value._id;
 		});
 		this.setState({ 
@@ -78,12 +82,24 @@ class UsersContacts extends Component {
 	};
 	
 	editForm = (_id, item) => {
+		this.state.users.forEach((value) => {
+			if (value._id === item.user) 
+				item.user = value.name;
+		});
 		this.setState({ array: this.data.map(result => (result[0] === _id ? Object.values(item) : result)) });
 		this.handleClose();
 	};
 	
 	viewItem = item => {
-		this.editItem(item);
+		this.setState({ 
+			arrayItems: {
+				_id: item[0], 
+				user: item[1], 
+				address: item[2], 
+				city: item[3], 
+				phone: item[4]
+			} 
+		});
 		this.handleView();
 	};
 

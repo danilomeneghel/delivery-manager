@@ -11,7 +11,7 @@ const AddForm = props => {
 		setForm({ ...item, [name]: value })
 	}
 	
-	const sendItem = item => {
+	const saveItem = item => {
 		api.post('/user-create', { item })
 		.then(response => {
 			var id = { _id: response.data.result._id }
@@ -34,7 +34,7 @@ const AddForm = props => {
 		<Form
 			onSubmit={event => {
 				event.preventDefault()
-				sendItem(item)
+				saveItem(item)
 			}}
 		>
 			{msg.success && <p>{msg.success}</p>}

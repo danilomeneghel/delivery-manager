@@ -72,7 +72,7 @@ class TopBar extends Component {
       value: 3
     },
     {
-      label: "UsersContacts",
+      label: "Contacts",
       pathname: "/users-contacts",
       value: 4
     }

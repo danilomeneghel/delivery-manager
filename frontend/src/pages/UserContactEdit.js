@@ -6,6 +6,7 @@ const EditForm = props => {
 	const [ item, setForm ] = useState(props.currentEdit)
 	const [ msg, setMsg ] = useState({})
 	const users = useState(props.users)
+	const [selectedOption, setSelectedOption] = useState(item.userSelected)
 
 	useEffect( () => { setForm(props.currentEdit) },
 		[ props ]
@@ -16,7 +17,8 @@ const EditForm = props => {
 		setForm({ ...item, [name]: value })
 	}
 
-	const sendItem = (_id, item) => {
+	const saveItem = (_id, item) => {
+		item.user = selectedOption
 		api.post('/user-contact-update/'+_id, { item })
 		.then(response => {
 			if(response.data.success) {
@@ -39,14 +41,14 @@ const EditForm = props => {
 		<Form
 		  onSubmit={event => {
 			event.preventDefault()
-			sendItem(item._id, item)
+			saveItem(item._id, item)
 		  }}
 		>
 			{msg.success && <p>{msg.success}</p>}
           	{msg.error && <p>{msg.error}</p>}
 			
 			<label>User</label><br />
-			<select name="user" value={item.userSelected} onChange={handleInputChange} required>
+			<select name="user" value={selectedOption} onChange={e => setSelectedOption(e.target.value)} required>
 				{options}
 			</select><br />
 

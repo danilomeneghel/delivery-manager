@@ -61,8 +61,7 @@ class Users extends Component {
 				username: item[2], 
 				email: item[3], 
 				role: item[4], 
-				status: item[5], 
-				action: ''
+				status: item[5]
 			} 
 		});
 		this.handleEdit();

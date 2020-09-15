@@ -30,12 +30,10 @@ exports.userContactCreate = (req, res) => {
 exports.userContactUpdate = (req, res) => {
     UserContact.updateOne({_id: ObjectId(req.params.id)}, {
         $set: {
-            name: req.body.item.name,
-            email: req.body.item.email,
-            username: req.body.item.username,
-            password: req.body.item.password,
-            role: req.body.item.role,
-            status: req.body.item.status
+            user: req.body.item.user,
+            address: req.body.item.address,
+            city: req.body.item.city,
+            phone: req.body.item.phone
         }
     })
     .then((result) => {

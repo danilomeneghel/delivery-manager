@@ -15,7 +15,7 @@ const EditForm = props => {
 		setForm({ ...item, [name]: value })
 	}
 
-	const sendItem = (_id, item) => {
+	const saveItem = (_id, item) => {
 		api.post('/user-update/'+_id, { item })
 		.then(response => {
 			if(response.data.success) {
@@ -34,7 +34,7 @@ const EditForm = props => {
 		<Form
 		  onSubmit={event => {
 			event.preventDefault()
-			sendItem(item._id, item)
+			saveItem(item._id, item)
 		  }}
 		>
 			{msg.success && <p>{msg.success}</p>}
