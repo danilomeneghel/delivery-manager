@@ -25,33 +25,33 @@ class Products extends Component {
 		api.get('/products-list')
 		.then(response => {
 			this.setState({ results: response.data })
-		});
+		})
 	}
 
 	handleAdd = () => {
 		this.setState({ add: true, edit: false, view: false });
-	};
+	}
 	
 	handleEdit = () => {
 		this.setState({ add: false, edit: true, view: false });
-	};
+	}
 	
 	handleView = () => {
 		this.setState({ add: false, edit: false, view: true });
-	};
+	}
 	
 	handleClose = () => {
 		this.setState({ add: false, edit: false, view: false });
-	};
+	}
 	
 	addItem = () => {
 		this.handleAdd();
-	};
+	}
 	
 	addForm = item => {
 		this.setState({ array: this.data.concat([Object.values(item)]) });
 		this.handleClose();
-	};
+	}
 
 	editItem = item => {
 		this.setState({ 
@@ -59,22 +59,21 @@ class Products extends Component {
 				_id: item[0], 
 				name: item[1], 
 				price: item[2], 
-				description: item[3], 
-				action: ''
+				description: item[3]
 			} 
 		});
 		this.handleEdit();
-	};
+	}
 	
 	editForm = (_id, item) => {
 		this.setState({ array: this.data.map(result => (result[0] === _id ? Object.values(item) : result)) });
 		this.handleClose();
-	};
+	}
 	
 	viewItem = item => {
 		this.editItem(item);
 		this.handleView();
-	};
+	}
 
 	render() {
 		

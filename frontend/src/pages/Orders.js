@@ -6,9 +6,9 @@ import api from "../services/api";
 import styles from "../styles/global";
 import TopBar from "../template/TopBar";
 import CustomToolbar from "../template/CustomToolbar";
-import AddForm from './UserAdd';
-import EditForm from './UserEdit';
-import ViewForm from './UserView';
+import AddForm from './OrderAdd';
+import EditForm from './OrderEdit';
+import ViewForm from './OrderView';
 
 class Orders extends Component {
 	
@@ -25,35 +25,55 @@ class Orders extends Component {
 		api.get('/orders-list')
 		.then(response => {
 			this.setState({ results: response.data })
-		});
+		})
+
+		api.get('/users-list')
+		.then(response => {
+			this.setState({ users: response.data })
+		})
+		
+		api.get('/products-list')
+		.then(response => {
+			this.setState({ products: response.data })
+		})
 	}
 
 	handleAdd = () => {
 		this.setState({ add: true, edit: false, view: false });
-	};
+	}
 	
 	handleEdit = () => {
 		this.setState({ add: false, edit: true, view: false });
-	};
+	}
 	
 	handleView = () => {
 		this.setState({ add: false, edit: false, view: true });
-	};
+	}
 	
 	handleClose = () => {
 		this.setState({ add: false, edit: false, view: false });
-	};
+	}
 	
 	addItem = () => {
 		this.handleAdd();
-	};
+	}
 	
 	addForm = item => {
 		this.setState({ array: this.data.concat([Object.values(item)]) });
 		this.handleClose();
-	};
+	}
 
 	editItem = item => {
+		var userSelected = null;
+		this.state.users.forEach((value) => {
+			if (value.name === item[1]) 
+				userSelected = value._id;
+		});
+		var productSelected = null;
+		this.state.products.forEach((value) => {
+			if (value.name === item[2]) 
+				productSelected = value._id;
+		});
 		this.setState({ 
 			arrayItems: {
 				_id: item[0], 
@@ -62,21 +82,39 @@ class Orders extends Component {
 				quantity: item[3], 
 				deliveryDate: item[4], 
 				note: item[5], 
-				action: ''
+				userSelected: userSelected,
+				productSelected: productSelected
 			} 
 		});
 		this.handleEdit();
-	};
+	}
 	
 	editForm = (_id, item) => {
+		this.state.users.forEach((value) => {
+			if (value._id === item.user) 
+				item.user = value.name;
+		});
+		this.state.products.forEach((value) => {
+			if (value._id === item.product) 
+				item.product = value.name;
+		});
 		this.setState({ array: this.data.map(result => (result[0] === _id ? Object.values(item) : result)) });
 		this.handleClose();
-	};
+	}
 	
 	viewItem = item => {
-		this.editItem(item);
+		this.setState({ 
+			arrayItems: {
+				_id: item[0], 
+				user: item[1], 
+				product: item[2], 
+				quantity: item[3], 
+				deliveryDate: item[4], 
+				note: item[5]
+			} 
+		});
 		this.handleView();
-	};
+	}
 
 	render() {
 		
@@ -85,8 +123,8 @@ class Orders extends Component {
 		if(!!this.state.results) {
 			this.array = this.state.results.map(result => [
 				result._id, 
-				result.user, 
-				result.product, 
+				result.user.name, 
+				result.product.name, 
 				result.quantity, 
 				result.deliveryDate, 
 				result.note, 
@@ -159,6 +197,8 @@ class Orders extends Component {
 									<EditForm
 									editing={this.state.edit}
 									currentEdit={this.state.arrayItems}
+									users={this.state.users}
+									products={this.state.products}
 									editForm={this.editForm}/>
 								</div>
 							</Fragment>
@@ -166,7 +206,10 @@ class Orders extends Component {
 							<Fragment>
 								<h2 id="simple-modal-title">Add {this.title}</h2>
 								<div id="simple-modal-description">
-									<AddForm addForm={this.addForm} />
+									<AddForm 
+									users={this.state.users}
+									products={this.state.products}
+									addForm={this.addForm} />
 								</div>
 							</Fragment>
 						) : (

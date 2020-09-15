@@ -35,23 +35,23 @@ class UsersContacts extends Component {
 
 	handleAdd = () => {
 		this.setState({ add: true, edit: false, view: false });
-	};
+	}
 	
 	handleEdit = () => {
 		this.setState({ add: false, edit: true, view: false });
-	};
+	}
 	
 	handleView = () => {
 		this.setState({ add: false, edit: false, view: true });
-	};
+	}
 	
 	handleClose = () => {
 		this.setState({ add: false, edit: false, view: false });
-	};
+	}
 	
 	addItem = () => {
 		this.handleAdd();
-	};
+	}
 	
 	addForm = item => {
 		this.state.users.forEach((value) => {
@@ -60,7 +60,7 @@ class UsersContacts extends Component {
 		});
 		this.setState({ array: this.data.concat([Object.values(item)]) });
 		this.handleClose();
-	};
+	}
 
 	editItem = item => {
 		var userSelected = null;
@@ -79,7 +79,7 @@ class UsersContacts extends Component {
 			} 
 		});
 		this.handleEdit();
-	};
+	}
 	
 	editForm = (_id, item) => {
 		this.state.users.forEach((value) => {
@@ -88,7 +88,7 @@ class UsersContacts extends Component {
 		});
 		this.setState({ array: this.data.map(result => (result[0] === _id ? Object.values(item) : result)) });
 		this.handleClose();
-	};
+	}
 	
 	viewItem = item => {
 		this.setState({ 
@@ -101,7 +101,7 @@ class UsersContacts extends Component {
 			} 
 		});
 		this.handleView();
-	};
+	}
 
 	render() {
 		

@@ -6,6 +6,7 @@ const AddForm = props => {
 	const [ item, setForm ] = useState([])
 	const [ msg, setMsg ] = useState({})
 	const users = useState(props.users)
+	const products = useState(props.products)
 	
 	const handleInputChange = event => {
 		const { name, value } = event.target
@@ -26,7 +27,7 @@ const AddForm = props => {
 			}
 		})
 		.catch(err => {
-			setMsg({ error: "Registration error", success: "" })
+			setMsg({ error: "Registration error or User already registered", success: "" })
 		})
 	}
 
@@ -34,6 +35,10 @@ const AddForm = props => {
 		<option key={opt._id} value={opt._id}>{opt.name}</option>
 	)
 	
+	const optionsProducts = products[0].map((opt) => 
+		<option key={opt._id} value={opt._id}>{opt.name}</option>
+	)
+
 	return (
 		<Form
 			onSubmit={event => {
@@ -49,14 +54,16 @@ const AddForm = props => {
 				{optionsUsers}			
 			</select><br />
 
-			<label>Address: </label><br />
-			<input type="text" name="address" value={item.address} onChange={handleInputChange} required /><br />
+			<label>Product</label><br />
+			<select name="product" onChange={handleInputChange} required>
+				{optionsProducts}			
+			</select><br />
 
-			<label>City: </label><br />
-			<input type="text" name="city" value={item.city} onChange={handleInputChange} required /><br />
+			<label>Quantity: </label><br />
+			<input type="text" name="quantity" value={item.quantity} onChange={handleInputChange} required /><br />
 
-			<label>Phone</label><br />
-			<input type="text" name="phone" value={item.phone} onChange={handleInputChange} required /><br /><br />
+			<label>Delivery Date: </label><br />
+			<input type="datetime-local" name="deliveryDate" value={item.deliveryDate} onChange={handleInputChange} required /><br />
 
 			<button><i className="fa fa-close"></i> Cancel</button> 
 			<button><i className="fa fa-hdd-o"></i> Save</button>

@@ -24,31 +24,31 @@ class TopBar extends Component {
     menuDrawer: false,
     open: false,
     anchorEl: null
-  };
+  }
   
   handleChange = (event, value) => {
     this.setState({ value });
-  };
+  }
 
   handleMenu = (event) => {
     this.setState({ open: true, anchorEl: true });
-  };
+  }
 
   handleClose = (event) => {
     this.setState({ open: false, anchorEl: false });
-  };
+  }
  
   mobileMenuOpen = event => {
     this.setState({ menuDrawer: true });
-  };
+  }
 
   mobileMenuClose = event => {
     this.setState({ menuDrawer: false });
-  };
+  }
 
   componentDidMount() {
     window.scrollTo(0, 0);
-  };
+  }
   
   menuLinks = [
     {
@@ -76,7 +76,7 @@ class TopBar extends Component {
       pathname: "/users-contacts",
       value: 4
     }
-  ];
+  ]
   
   tabCurrent = () => {
     var current = 0;
@@ -85,7 +85,7 @@ class TopBar extends Component {
         current = item.value;
     });
     return current;
-  };
+  }
 
   render() {
     

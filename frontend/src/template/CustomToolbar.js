@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 const defaultToolbarStyles = {
   iconButton: {},
-};
+}
 
 class CustomToolbar extends Component {
   
