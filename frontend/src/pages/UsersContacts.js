@@ -24,10 +24,13 @@ class UsersContacts extends Component {
 	componentDidMount() {
 		api.get('/users-contacts-list')
 		.then(response => {
-			this.setState({
-				results: response.data
-			})
-		});
+			this.setState({ results: response.data })
+		})
+		
+		api.get('/users-list')
+		.then(response => {
+			this.setState({ users: response.data })
+		})
 	}
 
 	handleAdd = () => {
@@ -56,13 +59,20 @@ class UsersContacts extends Component {
 	};
 
 	editItem = item => {
-		this.setState({ arrayItems: {
-			_id: item[0], 
-			user: item[1], 
-			address: item[2], 
-			city: item[3], 
-			phone: item[4], 
-			action: ''} 
+		var userSelected = null;
+		this.state.users.forEach((value) => {
+			if (value.name == item[1]) 
+				userSelected = value._id;
+		});
+		this.setState({ 
+			arrayItems: {
+				_id: item[0], 
+				user: item[1], 
+				address: item[2], 
+				city: item[3], 
+				phone: item[4], 
+				userSelected: userSelected 
+			} 
 		});
 		this.handleEdit();
 	};
@@ -84,7 +94,7 @@ class UsersContacts extends Component {
 		if(!!this.state.results) {
 			this.array = this.state.results.map(result => [
 				result._id, 
-				result.user, 
+				result.user.name, 
 				result.address, 
 				result.city, 
 				result.phone, 
@@ -157,6 +167,7 @@ class UsersContacts extends Component {
 									<EditForm
 									editing={this.state.edit}
 									currentEdit={this.state.arrayItems}
+									users={this.state.users}
 									editForm={this.editForm}/>
 								</div>
 							</Fragment>
@@ -164,7 +175,9 @@ class UsersContacts extends Component {
 							<Fragment>
 								<h2 id="simple-modal-title">Add {this.title}</h2>
 								<div id="simple-modal-description">
-									<AddForm addForm={this.addForm} />
+									<AddForm 
+									users={this.state.users}
+									addForm={this.addForm} />
 								</div>
 							</Fragment>
 						) : (

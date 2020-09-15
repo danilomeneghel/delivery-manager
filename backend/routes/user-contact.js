@@ -5,16 +5,16 @@ module.exports = (app) => {
 
     //API
     app.route('/users-contacts-list')
-        .get(user.usersContactsList)
+        .get(userContact.usersContactsList)
     
     app.route('/user-contact-create')
-        .post(user.userContactCreate)
+        .post(userContact.userContactCreate)
     
     app.route('/user-contact-update/:id')
-        .post(user.userContactUpdate)
+        .post(userContact.userContactUpdate)
     
     app.route('/user-contact-remove/:id')
-        .get(user.userContactRemove)
+        .get(userContact.userContactRemove)
     
     //Local
     app.route('/users-contacts')

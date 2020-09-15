@@ -5,6 +5,7 @@ import api from "../services/api";
 const AddForm = props => {
 	const [ item, setForm ] = useState([])
 	const [ msg, setMsg ] = useState({})
+	const users = useState(props.users)
 	
 	const handleInputChange = event => {
 		const { name, value } = event.target
@@ -29,16 +30,9 @@ const AddForm = props => {
 		})
 	}
 
-	const userList = () => {
-		var options = null;
-		item.user.forEach((value, key) => {
-			var selected = null;
-		  	if (value.name == item.user.name) 
-				selected = 'selected';
-			options += '<option value="'+value._id+'" selected>'+value.name+'</option>'
-		});
-		return options;
-	};
+	const options = users[0].map((opt) => 
+		<option value={opt._id}>{opt.name}</option>
+	)
 	
 	return (
 		<Form
@@ -52,7 +46,7 @@ const AddForm = props => {
 			
 			<label>User</label><br />
 			<select name="user" onChange={handleInputChange} required>
-				{userList}			
+				{options}			
 			</select><br />
 
 			<label>Address: </label><br />
@@ -62,7 +56,7 @@ const AddForm = props => {
 			<input type="text" name="city" value={item.city} onChange={handleInputChange} required /><br />
 
 			<label>Phone</label><br />
-			<input type="number" name="phone" value={item.phone} onChange={handleInputChange} required /><br /><br />
+			<input type="text" name="phone" value={item.phone} onChange={handleInputChange} required /><br /><br />
 
 			<button><i className="fa fa-close"></i> Cancel</button> 
 			<button><i className="fa fa-hdd-o"></i> Save</button>

@@ -6,9 +6,6 @@ const EditForm = props => {
 	const [ item, setForm ] = useState(props.currentEdit)
 	const [ msg, setMsg ] = useState({})
 
-	console.log("item ", item)
-	console.log("currentEdit ", props.currentEdit)
-
 	useEffect( () => { setForm(props.currentEdit) },
 		[ props ]
 	)

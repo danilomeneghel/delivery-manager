@@ -24,9 +24,7 @@ class Orders extends Component {
 	componentDidMount() {
 		api.get('/orders-list')
 		.then(response => {
-			this.setState({
-				results: response.data
-			})
+			this.setState({ results: response.data })
 		});
 	}
 
@@ -56,14 +54,16 @@ class Orders extends Component {
 	};
 
 	editItem = item => {
-		this.setState({ arrayItems: {
-			_id: item[0], 
-			user: item[1], 
-			product: item[2], 
-			quantity: item[3], 
-			deliveryDate: item[4], 
-			note: item[5], 
-			action: ''} 
+		this.setState({ 
+			arrayItems: {
+				_id: item[0], 
+				user: item[1], 
+				product: item[2], 
+				quantity: item[3], 
+				deliveryDate: item[4], 
+				note: item[5], 
+				action: ''
+			} 
 		});
 		this.handleEdit();
 	};

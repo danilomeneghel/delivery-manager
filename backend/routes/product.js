@@ -5,16 +5,16 @@ module.exports = (app) => {
 
     //API
     app.route('/products-list')
-        .get(user.productsList)
+        .get(product.productsList)
     
     app.route('/product-create')
-        .post(user.productCreate)
+        .post(product.productCreate)
     
     app.route('/product-update/:id')
-        .post(user.productUpdate)
+        .post(product.productUpdate)
     
     app.route('/product-remove/:id')
-        .get(user.productRemove)
+        .get(product.productRemove)
     
     //Local    
     app.route('/products')

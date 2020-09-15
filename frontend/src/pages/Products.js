@@ -24,9 +24,7 @@ class Products extends Component {
 	componentDidMount() {
 		api.get('/products-list')
 		.then(response => {
-			this.setState({
-				results: response.data
-			})
+			this.setState({ results: response.data })
 		});
 	}
 
@@ -56,12 +54,14 @@ class Products extends Component {
 	};
 
 	editItem = item => {
-		this.setState({ arrayItems: {
-			_id: item[0], 
-			name: item[1], 
-			price: item[2], 
-			description: item[3], 
-			action: ''} 
+		this.setState({ 
+			arrayItems: {
+				_id: item[0], 
+				name: item[1], 
+				price: item[2], 
+				description: item[3], 
+				action: ''
+			} 
 		});
 		this.handleEdit();
 	};

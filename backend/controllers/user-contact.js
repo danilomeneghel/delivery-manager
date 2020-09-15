@@ -5,8 +5,9 @@ const UserContact = require("../models/user-contact"),
 
 var ObjectId = mongoose.Types.ObjectId
 
-exports.usersList = (req, res) => {
+exports.usersContactsList = (req, res) => {
     UserContact.find()
+    .populate('user')
     .exec((err, results) => {
         if (err) return res.send(err)
 

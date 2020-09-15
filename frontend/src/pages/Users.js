@@ -24,9 +24,7 @@ class Users extends Component {
 	componentDidMount() {
 		api.get('/users-list')
 		.then(response => {
-			this.setState({
-				results: response.data
-			})
+			this.setState({ results: response.data })
 		});
 	}
 
@@ -56,14 +54,16 @@ class Users extends Component {
 	};
 
 	editItem = item => {
-		this.setState({ arrayItems: {
-			_id: item[0], 
-			name: item[1], 
-			username: item[2], 
-			email: item[3], 
-			role: item[4], 
-			status: item[5], 
-			action: ''} 
+		this.setState({ 
+			arrayItems: {
+				_id: item[0], 
+				name: item[1], 
+				username: item[2], 
+				email: item[3], 
+				role: item[4], 
+				status: item[5], 
+				action: ''
+			} 
 		});
 		this.handleEdit();
 	};
