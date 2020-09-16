@@ -7,8 +7,8 @@ const EditForm = props => {
 	const [ msg, setMsg ] = useState({})
 	const users = useState(props.users)
 	const products = useState(props.products)
-	const [userSelected, setUserSelected] = useState(item.userSelected)
-	const [productSelected, setProductSelected] = useState(item.productSelected)
+	const [ userSelected, setUserSelected ] = useState(item.userSelected)
+	const [ productSelected, setProductSelected ] = useState(item.productSelected)
 
 	useEffect( () => { setForm(props.currentEdit) },
 		[ props ]
@@ -22,17 +22,25 @@ const EditForm = props => {
 	const saveItem = (_id, item) => {
 		item.user = userSelected
 		item.product = productSelected
-		api.post('/user-contact-update/'+_id, { item })
+		api.post('/order-update/'+_id, { item })
 		.then(response => {
 			if(response.data.success) {
-				setMsg({ success: response.data.success, error: "" });
-				props.editForm(item._id, item)
+				setMsg({ success: response.data.success, error: "" })
+				var items = {
+					_id: item._id,
+					user: item.user,
+					product: item.product,
+					quantity: item.quantity,
+					deliveryDate: item.deliveryDate,
+					note: item.note
+				}
+				props.editForm(item._id, items)
 			} else {
-				setMsg({ error: "Registration error", success: "" });
+				setMsg({ error: "Registration error", success: "" })
 			}
 		})
 		.catch(err => {
-			setMsg({ error: "Registration error", success: "" });
+			setMsg({ error: "Registration error", success: "" })
 		})
 	}
 
@@ -51,8 +59,6 @@ const EditForm = props => {
 			saveItem(item._id, item)
 		  }}
 		>
-			date: {(item.deliveryDate || '').toString().replace(".000Z", "")}
-			
 			{msg.success && <p>{msg.success}</p>}
           	{msg.error && <p>{msg.error}</p>}
 			
@@ -72,6 +78,9 @@ const EditForm = props => {
 			<label>Delivery Date: </label><br />
 			<input type="datetime-local" name="deliveryDate" value={(item.deliveryDate || '').toString().replace(".000Z", "")} onChange={handleInputChange} required /><br />
 
+			<label>Note: </label><br />
+			<textarea name="note" value={item.note} onChange={handleInputChange}>{item.note}</textarea><br /><br />
+			
 			<button><i className="fa fa-close"></i> Cancel</button> 
 			<button><i className="fa fa-hdd-o"></i> Save</button>
 		</Form>

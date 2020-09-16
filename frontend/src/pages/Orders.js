@@ -59,6 +59,14 @@ class Orders extends Component {
 	}
 	
 	addForm = item => {
+		this.state.users.forEach((value) => {
+			if (value._id === item.user) 
+				item.user = value.name;
+		});
+		this.state.products.forEach((value) => {
+			if (value._id === item.product) 
+				item.product = value.name;
+		});
 		this.setState({ array: this.data.concat([Object.values(item)]) });
 		this.handleClose();
 	}

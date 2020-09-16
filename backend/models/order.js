@@ -5,7 +5,7 @@ var orderSchema = new mongoose.Schema({
     product: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
     quantity: { type: Number, required: true, default: 1 },
     deliveryDate: { type: Date, required: true },
-    note: { type: String, required: true }
+    note: { type: String }
 }, 
 {
     timestamps: true

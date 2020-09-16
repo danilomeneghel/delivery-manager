@@ -18,7 +18,10 @@ const ViewForm = props => {
 			{item.quantity}<br />
 
 			<label>Date Delivery:&nbsp;</label>
-			{item.dateDelivery}<br />
+			{item.deliveryDate}<br />
+
+			<label>Note:&nbsp;</label>
+			{item.note}<br />
 		</Fragment>
 	)
 }

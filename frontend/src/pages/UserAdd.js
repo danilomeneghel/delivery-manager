@@ -19,7 +19,16 @@ const AddForm = props => {
 			delete item.password
 			if(response.data.success) {
 				setMsg({ success: response.data.success, error: "" })
-				props.addForm(item)
+				var result = response.data.result
+				var items = {
+					_id: result._id,
+					name: result.name,
+					username: result.username,
+					email: result.email,
+					role: result.role,
+					status: result.status
+				}
+				props.addForm(items)
 				setForm([])
 			} else {
 				setMsg({ error: "Registration error", success: "" })

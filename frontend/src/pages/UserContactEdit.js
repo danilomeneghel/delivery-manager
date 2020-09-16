@@ -6,7 +6,7 @@ const EditForm = props => {
 	const [ item, setForm ] = useState(props.currentEdit)
 	const [ msg, setMsg ] = useState({})
 	const users = useState(props.users)
-	const [userSelected, setUserSelected] = useState(item.userSelected)
+	const [ userSelected, setUserSelected ] = useState(item.userSelected)
 
 	useEffect( () => { setForm(props.currentEdit) },
 		[ props ]
@@ -22,14 +22,21 @@ const EditForm = props => {
 		api.post('/user-contact-update/'+_id, { item })
 		.then(response => {
 			if(response.data.success) {
-				setMsg({ success: response.data.success, error: "" });
-				props.editForm(item._id, item)
+				setMsg({ success: response.data.success, error: "" })
+				var items = {
+					_id: item._id,
+					user: item.user,
+					address: item.address,
+					city: item.city,
+					phone: item.phone
+				}
+				props.editForm(item._id, items)
 			} else {
-				setMsg({ error: "Registration error", success: "" });
+				setMsg({ error: "Registration error", success: "" })
 			}
 		})
 		.catch(err => {
-			setMsg({ error: "Registration error", success: "" });
+			setMsg({ error: "Registration error", success: "" })
 		})
 	}
 

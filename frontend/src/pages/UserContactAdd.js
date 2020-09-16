@@ -6,6 +6,7 @@ const AddForm = props => {
 	const [ item, setForm ] = useState([])
 	const [ msg, setMsg ] = useState({})
 	const users = useState(props.users)
+	const [ userSelected, setUserSelected ] = useState(0)
 	
 	const handleInputChange = event => {
 		const { name, value } = event.target
@@ -13,13 +14,20 @@ const AddForm = props => {
 	}
 	
 	const saveItem = item => {
+		item.user = userSelected
 		api.post('/user-contact-create', { item })
 		.then(response => {
-			var id = { _id: response.data.result._id }
-			item = { ...id, ...item }
 			if(response.data.success) {
 				setMsg({ success: response.data.success, error: "" })
-				props.addForm(item)
+				var result = response.data.result
+				var items = {
+					_id: result._id,
+					user: result.user,
+					address: result.address,
+					city: result.city,
+					phone: result.phone
+				}
+				props.addForm(items)
 				setForm([])
 			} else {
 				setMsg({ error: "Registration error", success: "" })
@@ -45,7 +53,8 @@ const AddForm = props => {
           	{msg.error && <p>{msg.error}</p>}
 			
 			<label>User</label><br />
-			<select name="user" onChange={handleInputChange} required>
+			<select name="user" value={userSelected} onChange={e => setUserSelected(e.target.value)} required>
+			<option key="0" value="0" disabled>Select User</option>
 				{optionsUsers}			
 			</select><br />
 

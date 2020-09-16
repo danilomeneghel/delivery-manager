@@ -7,20 +7,31 @@ const AddForm = props => {
 	const [ msg, setMsg ] = useState({})
 	const users = useState(props.users)
 	const products = useState(props.products)
-	
+	const [ userSelected, setUserSelected ] = useState(0)
+	const [ productSelected, setProductSelected ] = useState(0)
+
 	const handleInputChange = event => {
 		const { name, value } = event.target
 		setForm({ ...item, [name]: value })
 	}
 	
 	const saveItem = item => {
-		api.post('/user-contact-create', { item })
+		item.user = userSelected
+		item.product = productSelected
+		api.post('/order-create', { item })
 		.then(response => {
-			var id = { _id: response.data.result._id }
-			item = { ...id, ...item }
 			if(response.data.success) {
 				setMsg({ success: response.data.success, error: "" })
-				props.addForm(item)
+				var result = response.data.result
+				var items = {
+					_id: result._id,
+					user: result.user,
+					product: result.product,
+					quantity: result.quantity,
+					deliveryDate: result.deliveryDate,
+					note: result.note
+				}
+				props.addForm(items)
 				setForm([])
 			} else {
 				setMsg({ error: "Registration error", success: "" })
@@ -50,13 +61,15 @@ const AddForm = props => {
           	{msg.error && <p>{msg.error}</p>}
 			
 			<label>User</label><br />
-			<select name="user" onChange={handleInputChange} required>
-				{optionsUsers}			
+			<select name="user" value={userSelected} onChange={e => setUserSelected(e.target.value)} required>
+				<option key="0" value="0" disabled>Select User</option>
+				{optionsUsers}
 			</select><br />
-
+			
 			<label>Product</label><br />
-			<select name="product" onChange={handleInputChange} required>
-				{optionsProducts}			
+			<select name="product" value={productSelected} onChange={e => setProductSelected(e.target.value)} required>
+				<option key="0" value="0" disabled>Select Product</option>
+				{optionsProducts}
 			</select><br />
 
 			<label>Quantity: </label><br />
@@ -64,6 +77,9 @@ const AddForm = props => {
 
 			<label>Delivery Date: </label><br />
 			<input type="datetime-local" name="deliveryDate" value={item.deliveryDate} onChange={handleInputChange} required /><br />
+
+			<label>Note: </label><br />
+			<textarea name="note" value={item.note} onChange={handleInputChange}></textarea><br /><br />
 
 			<button><i className="fa fa-close"></i> Cancel</button> 
 			<button><i className="fa fa-hdd-o"></i> Save</button>

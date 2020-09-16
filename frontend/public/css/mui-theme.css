@@ -53,13 +53,13 @@ p, label, label span, fieldset span, svg {
 	color: #fff !important;
 }
 
-input {
+input, textarea, select {
 	background-color: #121212 !important;
 	color: #fff !important;
 	border: none !important;
 	padding: 0px 10px !important;
 }
-input:focus {
+input:focus, textarea:focus {
     box-shadow: 1px 1px 5px #ff852d !important;
     border: 1px solid #ff9042 !important;
 }
@@ -71,10 +71,8 @@ input[type=checkbox], input[type=radio] {
     margin: 8px 4px !important;
 }
 
-select {
-	background-color: #121212 !important;
-	color: #fff !important;
-	padding: 0px 10px !important;
+textarea {
+	min-width: 375px;
 }
 
 button {
