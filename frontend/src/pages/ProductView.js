@@ -11,17 +11,11 @@ const ViewForm = props => {
 			<label>Name:&nbsp;</label>
 			{item.name}<br />
 
-			<label>Usuario:&nbsp;</label>
-			{item.username}<br />
+			<label>Price:&nbsp;</label>
+			{item.price}<br />
 
-			<label>E-mail:&nbsp;</label>
-			{item.email}<br />
-
-			<label>Role:&nbsp;</label>
-			{item.role}<br />
-			
-			<label>Status:&nbsp;</label>
-			{item.status}<br />
+			<label>Description:&nbsp;</label>
+			{item.description}<br />
 		</Fragment>
 	)
 }

@@ -6,9 +6,9 @@ import api from "../services/api";
 import styles from "../styles/global";
 import TopBar from "../template/TopBar";
 import CustomToolbar from "../template/CustomToolbar";
-import AddForm from './UserAdd';
-import EditForm from './UserEdit';
-import ViewForm from './UserView';
+import AddForm from './ProductAdd';
+import EditForm from './ProductEdit';
+import ViewForm from './ProductView';
 
 class Products extends Component {
 	
