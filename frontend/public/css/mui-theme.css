@@ -53,7 +53,7 @@ p, label, label span, fieldset span, svg {
 	color: #fff !important;
 }
 
-input, textarea, select {
+input, textarea {
 	background-color: #121212 !important;
 	color: #fff !important;
 	border: none !important;
@@ -73,6 +73,13 @@ input[type=checkbox], input[type=radio] {
 
 textarea {
 	min-width: 375px;
+}
+
+select {
+	background-color: #121212 !important;
+	color: #fff !important;
+	padding: 0px 10px !important;
+	margin: 10px 10px !important;
 }
 
 button {
@@ -138,14 +145,15 @@ button {
 }
 
 .tab {
+	font-weight: bold;
 	border-right: none !important;
-}
-.tab span {
 	background-color: #808080 !important;
+	color: #121212 !important;
+	cursor: pointer;
 }
 
-.selected span{
-    font-weight: bold;
+.selected {
+	text-align:center;
 	border-top: 3px solid #ff6d00 !important;
 	background-color: #252525 !important;
     color: #fff !important;
@@ -196,6 +204,8 @@ table th:last-child span {
 
 .MuiButtonBase-root {
 	color: #fff !important;
+	font-weight: 500 !important;
+	text-decoration: none !important;
 }
 
 .Mui-selected {
