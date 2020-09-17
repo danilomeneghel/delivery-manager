@@ -11,25 +11,23 @@ class SignIn extends Component {
     password: "",
     success: "",
     error: ""
-  };
+  }
 
   handleSignIn = async e => {
-    e.preventDefault();
-    const { username, password } = this.state;
+    e.preventDefault()
+    const { username, password } = this.state
     if (!username || !password) {
-      this.setState({ error: "Fill in the Username and Password fields" });
+      this.setState({ error: "Fill in the Username and Password fields", success: "" })
     } else {
       try {
-        const response = await api.post("/signIn", { username, password });
-        login(response.data.token);
-        this.props.history.push("/");
+        const response = await api.post("/signIn", { username, password })
+        login(response.data.token)
+        this.props.history.push("/")
       } catch (err) {
-        this.setState({
-          error: "Username or Password is invalid"
-        });
+        this.setState({ error: "Username or Password is invalid", success: "" })
       }
     }
-  };
+  }
 
   render() {
     return (
@@ -54,7 +52,7 @@ class SignIn extends Component {
           <button type="submit" className="btn btn-login btn-lg btn-block">Sign In</button>
         </Form>
       </Container>
-    );
+    )
   }
 }
 

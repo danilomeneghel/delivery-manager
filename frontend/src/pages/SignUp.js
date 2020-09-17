@@ -14,28 +14,27 @@ class SignUp extends Component {
     status: "active",
     success: "",
     error: ""
-  };
+  }
 
   handleSignUp = async e => {
-    e.preventDefault();
-    const { name, username, email, password, role, status } = this.state;
+    e.preventDefault()
+    const { name, username, email, password, role, status } = this.state
     if (!username || !email || !password) {
-      this.setState({ error: "Fill in all the data to register" });
+      this.setState({ error: "Fill in all the data to register", success:"" })
     } else {
       await api.post("/signUp", { name, username, email, password, role, status })
       .then(response => {
         if(response.data.success) {
-          this.setState({ success: response.data.success, error: "" });
-          this.props.history.push("/");
+          this.setState({ success: response.data.success, error: "" })
         } else {
-          this.setState({ error: "Registration error", success: "" });
+          this.setState({ error: "Registration error", success: "" })
         }
       })
       .catch(err => {
-        this.setState({ error: "Registration error or User already registered", success: "" });
+        this.setState({ error: "Registration error or User already registered", success: "" })
       })
     }
-  };
+  }
 
   render() {
     return (
@@ -74,7 +73,7 @@ class SignUp extends Component {
           <button type="submit" className="btn btn-login btn-lg btn-block">Sign Up</button>
         </Form>
       </Container>
-    );
+    )
   }
 }
 

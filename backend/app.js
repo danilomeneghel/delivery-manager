@@ -8,10 +8,7 @@ const express = require('express'),
   db = require('./config/db'),
   error = require('./util/error'),
   flash = require('connect-flash'),
-  moment = require('moment'),
   cors = require('cors');
-
-app.locals.moment = moment;
 
 app.use(cors());
 app.use(bodyParser.json());

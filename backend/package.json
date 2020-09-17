@@ -18,7 +18,6 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "jsonwebtoken": "^8.5.1",
-    "moment": "^2.27.0",
     "mongoose": "^5.9.26",
     "nodemailer": "^6.4.11",
     "passport": "^0.4.1",
