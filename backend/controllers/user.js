@@ -92,20 +92,20 @@ exports.pageEdit = (req, res) => {
 }
 
 exports.userEdit = (req, res) => {
-    User.findOne({_id: ObjectId(req.params.id)})
-    .then((user) => {
-        user.setPassword(req.body.password, (err, user) => {
-            if (err) return res.render('user-edit', { message: {'error': err} }) 
-
-            user.name = req.body.name
-            user.email = req.body.email
-            user.username = req.body.username
-            user.role = req.body.role
-            user.status = req.body.status
-            user.save()
-
-            res.redirect("/users")
-        })
+    User.updateOne({_id: ObjectId(req.params.id)}, {
+        $set: {
+            name: req.body.name,
+            email: req.body.email,
+            username: req.body.username,
+            password: req.body.password,
+            role: req.body.role,
+            status: req.body.status
+        }
+    })
+	.then((result) => {
+        if (!result) return res.render('user-edit', { message: {'error': result} }) 
+        
+        res.redirect("/users")
     })
     .catch(err => {
         return res.render('user-edit', { message: {'error': err} }) 
@@ -122,18 +122,22 @@ exports.pageProfile = (req, res) => {
 }
 
 exports.editProfile = (req, res) => {
-    User.findByIdAndUpdate(req.user.id, {
-        $set: {
-            name: req.body.name,
-            email: req.body.email,
-            username: req.body.username,
-            password: req.body.password
-        }
+	var data = {
+		name: req.body.name,
+		email: req.body.email,
+		username: req.body.username,
+		password: req.body.password
+	}
+    User.updateOne({_id: req.user.id}, {
+        $set: data
     })
-    .exec((err, result) => {
-        if (err) return res.render('profile', { message: {'error': err} }) 
-        
-        res.render('profile', { data: [result], message: {'success': 'Profile updated success!'} })
+	.then((result) => {
+        if (!result) return res.render('profile', { message: {'error': result} }) 
+		
+        res.render('profile', { data: [data], message: {'success': 'Profile updated success!'} })
+    })
+    .catch(err => {
+        return res.render('profile', { message: {'error': err} }) 
     })
 }
 
