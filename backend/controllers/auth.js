@@ -76,25 +76,16 @@ exports.signUp = (req, res) => {
 }
 
 exports.auth = (req, res, next) => { 
+    passport.serializeUser(User.serializeUser())
+    passport.deserializeUser(User.deserializeUser())
     passport.authenticate("local", {
         successRedirect: "/",
         failureRedirect: "/login",
         failureFlash: "Username or Password is invalid"
-    })
+    })(req, res, next)
 }
 
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-})
-
-passport.deserializeUser(function(id, done) {
-	User.findOne({_id: ObjectId(id)})
-	.exec((err, user) => {
-        done(err, user)
-    })
-})
-
-exports.index = () => {
+exports.index = (req, res) => {
     res.render("index")
 }
 
@@ -114,7 +105,7 @@ exports.pageRegister = (req, res) => {
 exports.addRegister = (req, res) => {
     User.create(req.body)
     .then((result) => {
-        if(result) return res.redirect('?error=' + result)
+        if(!result) return res.redirect('?error=' + result)
 
         res.render("login", { message: {'success': 'User successfully registered!'} })
     })

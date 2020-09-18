@@ -50,5 +50,5 @@ app.use(error.notfound);
 app.use(error.serverError);
 
 app.listen(process.env.PORT, () => {
-  console.log('App listening on port 3001!');
+  console.log('App listening in ' + process.env.HOST + ':' + process.env.PORT);
 });
