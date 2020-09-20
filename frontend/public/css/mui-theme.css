@@ -53,15 +53,26 @@ p, label, label span, fieldset span, svg {
 	color: #fff !important;
 }
 
+fieldset {
+	color: #fff !important;
+	border: 1px solid #6e6e6e !important;
+	border-radius: 4px !important;
+}
+
+input {
+	height: 32px !important;
+}
+
 input, textarea {
 	background-color: #121212 !important;
 	color: #fff !important;
+	padding: 8px !important;
+	margin-bottom: 1px !important;
 	border: none !important;
-	padding: 0px 10px !important;
 }
-input:focus, textarea:focus {
-    box-shadow: 1px 1px 5px #ff852d !important;
-    border: 1px solid #ff9042 !important;
+
+input::placeholder {
+	color: #fff !important;
 }
 
 input[type=checkbox], input[type=radio] {
@@ -72,7 +83,7 @@ input[type=checkbox], input[type=radio] {
 }
 
 textarea {
-	min-width: 375px;
+	padding: 10px !important;
 }
 
 select {
@@ -163,9 +174,49 @@ button {
     color: #fff !important;
 }
 
+.MuiPickersCalendarHeader-iconButton {
+	background-color: #252525 !important;
+}
+
+.MuiPickersClockPointer-pointer {
+	background-color: #fff !important;
+}
+
+.MuiPickersClockPointer-thumb {
+	border: 14px solid #4d4d4d !important;
+}
+
+.MuiPickersClockNumber-clockNumber {
+	color: #f2f2f2 !important;
+}
+
+#pagination-menu {
+	position: sticky !important;
+	height: 250px !important;
+	top: -50px !important;
+	overflow-y: auto !important;
+}
+
+.MuiIconButton-label {
+	font-size: 16px;
+	padding: 5px;
+}
+
+.MuiInputBase-input {
+	margin: none !important;
+}
+
+.MuiOutlinedInput-root {
+    background-color: #121212 !important;
+}
+
+.MuiOutlinedInput-multiline {
+	padding: 0px !important;
+}
+
 .MuiDrawer-root .MuiDrawer-paperAnchorLeft {
 	background-color: #ff6d00eb !important;
-	min-width: 45% !important;
+	min-width: 60% !important;
 }
 
 .MuiTypography-h6 {
@@ -213,10 +264,10 @@ table th:last-child span {
 }
 
 .MuiMenu-paper {
-	top: 50px !important;
-	right: 15px !important;
-	left: unset !important;
-	overflow: auto !important;
+    top: 10px !important;
+    right: none !important;
+    left: none !important;
+    overflow-y: auto !important;
 }
 
 .MuiMenu-list .Mui-selected {
@@ -258,7 +309,7 @@ table th:last-child span {
 
 .MuiTableCell-root {
 	font-size: 1rem !important;
-	padding: 5px 5px 5px 5px !important;
+	padding: 1px !important;
 	position: unset !important;
 	border-bottom: 1px solid #3b3b3b !important;
 }

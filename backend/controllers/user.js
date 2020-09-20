@@ -13,6 +13,16 @@ exports.usersList = (req, res) => {
     })
 }
 
+exports.usersCombo = (req, res) => {
+    User.find()
+    .select({ "_id": 1, "name": 2 })
+    .exec((err, results) => {
+        if (err) return res.send(err)
+
+        res.status(200).json(results)
+    })
+}
+
 exports.userCreate = (req, res) => {
     User.create(req.body.item)
     .then((result) => {

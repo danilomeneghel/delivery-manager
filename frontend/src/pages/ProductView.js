@@ -8,14 +8,22 @@ const ViewForm = props => {
 
 	return (
 		<Fragment>
-			<label>Name:&nbsp;</label>
-			{item.name}<br />
+			<fieldset>
+				<legend>Name:</legend>
+				{item.name}
+			</fieldset>
 
-			<label>Price:&nbsp;</label>
-			{item.price}<br />
+			<fieldset>
+				<legend>Price:</legend>
+				{item.price}
+			</fieldset>
 
-			<label>Description:&nbsp;</label>
-			{item.description}<br />
+			<fieldset>
+				<legend>Description:</legend>
+				{item.description}
+			</fieldset>
+			
+			<br /><br />
 		</Fragment>
 	)
 }

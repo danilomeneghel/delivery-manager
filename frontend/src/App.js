@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import Routes from './routes';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
-import Routes from './routes';
 import { deepOrange } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({

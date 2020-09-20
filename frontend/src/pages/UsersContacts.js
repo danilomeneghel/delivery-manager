@@ -15,7 +15,7 @@ class UsersContacts extends Component {
 	constructor (props) {
 		super(props);
 
-		this.title = 'Users Contacts';
+		this.title = 'User Contact';
 		this.state = { add: false, edit: false, view: false };	
 		this.array = [];
 		this.data = [];

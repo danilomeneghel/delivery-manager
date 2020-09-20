@@ -15,7 +15,7 @@ class Users extends Component {
 	constructor (props) {
 		super(props);
 
-		this.title = 'Users';
+		this.title = 'User';
 		this.state = { add: false, edit: false, view: false };	
 		this.array = [];
 		this.data = [];

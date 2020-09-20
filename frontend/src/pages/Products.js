@@ -15,7 +15,7 @@ class Products extends Component {
 	constructor (props) {
 		super(props);
 
-		this.title = 'Products';
+		this.title = 'Product';
 		this.state = { add: false, edit: false, view: false };	
 		this.array = [];
 		this.data = [];

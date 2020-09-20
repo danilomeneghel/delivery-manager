@@ -15,7 +15,7 @@ class Orders extends Component {
 	constructor (props) {
 		super(props);
 
-		this.title = 'Orders';
+		this.title = 'Order';
 		this.state = { add: false, edit: false, view: false };	
 		this.array = [];
 		this.data = [];
@@ -27,12 +27,12 @@ class Orders extends Component {
 			this.setState({ results: response.data })
 		})
 
-		api.get('/users-list')
+		api.get('/users-combo')
 		.then(response => {
 			this.setState({ users: response.data })
 		})
 		
-		api.get('/products-list')
+		api.get('/products-combo')
 		.then(response => {
 			this.setState({ products: response.data })
 		})

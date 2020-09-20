@@ -1,14 +1,21 @@
+import 'date-fns';
 import React, { useState, useEffect } from 'react';
+import DateFnsUtils from '@date-io/date-fns';
+import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { TextField, MenuItem, IconButton } from "@material-ui/core";
+import CancelIcon from '@material-ui/icons/Cancel';
+import SaveIcon from '@material-ui/icons/Save';
 import { Form } from "../styles/form";
 import api from "../services/api";
 
 const EditForm = props => {
 	const [ item, setForm ] = useState(props.currentEdit)
 	const [ msg, setMsg ] = useState({})
-	const users = useState(props.users)
-	const products = useState(props.products)
+	const users = useState([{ "_id": "", "name": "Select User" }].concat(props.users))
+	const products = useState([{ "_id": "", "name": "Select Product" }].concat(props.products))
 	const [ userSelected, setUserSelected ] = useState(item.userSelected)
 	const [ productSelected, setProductSelected ] = useState(item.productSelected)
+	const [ deliveryDateSelected, handleDateChange ] = useState(item.deliveryDate)
 
 	useEffect( () => { setForm(props.currentEdit) },
 		[ props ]
@@ -22,6 +29,7 @@ const EditForm = props => {
 	const saveItem = (_id, item) => {
 		item.user = userSelected
 		item.product = productSelected
+		item.deliveryDate = deliveryDateSelected
 		api.post('/order-update/'+_id, { item })
 		.then(response => {
 			if(response.data.success) {
@@ -44,14 +52,6 @@ const EditForm = props => {
 		})
 	}
 
-	const optionsUsers = users[0].map((opt) => 
-		<option key={opt._id} value={opt._id}>{opt.name}</option>
-	)
-	
-	const optionsProducts = products[0].map((opt) => 
-		<option key={opt._id} value={opt._id}>{opt.name}</option>
-	)
-
 	return (
 		<Form
 		  onSubmit={event => {
@@ -62,27 +62,58 @@ const EditForm = props => {
 			{msg.success && <p>{msg.success}</p>}
           	{msg.error && <p>{msg.error}</p>}
 			
-			<label>User</label><br />
-			<select name="user" value={userSelected} onChange={e => setUserSelected(e.target.value)} required>
-				{optionsUsers}
-			</select><br />
+			<TextField
+				select
+				name="user"
+				label="User"
+				value={userSelected}
+				onChange={e => setUserSelected(e.target.value)}
+				variant="outlined"
+				fullWidth
+				required
+				>
+				{users[0].map((option) => (
+					<MenuItem key={option._id} value={option._id}>
+						{option.name}
+					</MenuItem>
+				))}
+			</TextField><br /><br />
 			
-			<label>Product</label><br />
-			<select name="product" value={productSelected} onChange={e => setProductSelected(e.target.value)} required>
-				{optionsProducts}
-			</select><br />
-
-			<label>Quantity: </label><br />
-			<input type="text" name="quantity" value={item.quantity} onChange={handleInputChange} required /><br />
-
-			<label>Delivery Date: </label><br />
-			<input type="datetime-local" name="deliveryDate" value={(item.deliveryDate || '').toString().replace(".000Z", "")} onChange={handleInputChange} required /><br />
-
-			<label>Note: </label><br />
-			<textarea name="note" value={item.note} onChange={handleInputChange}>{item.note}</textarea><br /><br />
+			<TextField
+				select
+				name="product"
+				label="Product"
+				value={productSelected}
+				onChange={e => setProductSelected(e.target.value)}
+				variant="outlined"
+				fullWidth
+				required
+				>
+				{products[0].map((option) => (
+					<MenuItem key={option._id} value={option._id}>
+						{option.name}
+					</MenuItem>
+				))}
+			</TextField><br /><br />
 			
-			<button><i className="fa fa-close"></i> Cancel</button> 
-			<button><i className="fa fa-hdd-o"></i> Save</button>
+			<TextField name="quantity" value={item.quantity} label="Quantity" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
+
+			<MuiPickersUtilsProvider utils={DateFnsUtils}>
+				<DateTimePicker
+					name="deliveryDate"
+					label="Delivery Date"
+					inputVariant="outlined"
+					value={deliveryDateSelected}
+					format="yyyy-MM-dd HH:mm"
+					fullWidth
+					onChange={handleDateChange}
+				/>
+			</MuiPickersUtilsProvider><br /><br />
+			
+			<TextField name="note" value={item.note} label="Note" variant="outlined" fullWidth multiline rows={4} onChange={handleInputChange} /><br /><br />
+
+			<IconButton><CancelIcon /> Cancel</IconButton>
+			<IconButton type="submit"><SaveIcon /> Save</IconButton>
 		</Form>
 	)
 }

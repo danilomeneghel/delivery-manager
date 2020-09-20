@@ -102,10 +102,10 @@ a:hover.btn {
 /*input {
     border-radius: 30px 30px 30px 30px !important;
 }*/
-input:focus {
+/*input:focus {
     box-shadow: 1px 1px 5px #54AA358F !important;
     border: 1px solid #0f7307 !important;
-}
+}*/
 
 /*select {
 	border-radius: 30px 30px 30px 30px !important;
@@ -115,9 +115,9 @@ input:focus {
     text-align: center;
     padding-bottom: 6px;
 }
-fieldset {
+/*fieldset {
     background-color: #fff !important;
-}
+}*/
 .form-group {
     margin-bottom: 15px;
 }

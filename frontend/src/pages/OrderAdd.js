@@ -1,14 +1,21 @@
+import 'date-fns';
 import React, { useState } from 'react';
+import DateFnsUtils from '@date-io/date-fns';
+import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { TextField, MenuItem, IconButton } from "@material-ui/core";
+import CancelIcon from '@material-ui/icons/Cancel';
+import SaveIcon from '@material-ui/icons/Save';
 import { Form } from "../styles/form";
 import api from "../services/api";
 
 const AddForm = props => {
 	const [ item, setForm ] = useState([])
 	const [ msg, setMsg ] = useState({})
-	const users = useState(props.users)
-	const products = useState(props.products)
-	const [ userSelected, setUserSelected ] = useState(0)
-	const [ productSelected, setProductSelected ] = useState(0)
+	const users = useState([{ "_id": "0", "name": "Select User" }].concat(props.users))
+	const products = useState([{ "_id": "0", "name": "Select Product" }].concat(props.products))
+	const [ userSelected, setUserSelected ] = useState(users[0][0]._id)
+	const [ productSelected, setProductSelected ] = useState(products[0][0]._id)
+	const [ deliveryDateSelected, handleDateChange ] = useState(new Date())
 
 	const handleInputChange = event => {
 		const { name, value } = event.target
@@ -18,6 +25,7 @@ const AddForm = props => {
 	const saveItem = item => {
 		item.user = userSelected
 		item.product = productSelected
+		item.deliveryDate = deliveryDateSelected
 		api.post('/order-create', { item })
 		.then(response => {
 			if(response.data.success) {
@@ -38,17 +46,9 @@ const AddForm = props => {
 			}
 		})
 		.catch(err => {
-			setMsg({ error: "Registration error or User already registered", success: "" })
+			setMsg({ error: "Registration error", success: "" })
 		})
 	}
-
-	const optionsUsers = users[0].map((opt) => 
-		<option key={opt._id} value={opt._id}>{opt.name}</option>
-	)
-	
-	const optionsProducts = products[0].map((opt) => 
-		<option key={opt._id} value={opt._id}>{opt.name}</option>
-	)
 
 	return (
 		<Form
@@ -59,31 +59,57 @@ const AddForm = props => {
 		>
 			{msg.success && <p>{msg.success}</p>}
           	{msg.error && <p>{msg.error}</p>}
+						
+			<TextField
+				select
+				name="user"
+				label="User"
+				value={userSelected}
+				onChange={e => setUserSelected(e.target.value)}
+				variant="outlined"
+				fullWidth
+				>
+				{users[0].map((option) => (
+					<MenuItem key={option._id} value={option._id}>
+						{option.name}
+					</MenuItem>
+				))}
+			</TextField><br /><br />
 			
-			<label>User</label><br />
-			<select name="user" value={userSelected} onChange={e => setUserSelected(e.target.value)} required>
-				<option key="0" value="0" disabled>Select User</option>
-				{optionsUsers}
-			</select><br />
+			<TextField
+				select
+				name="product"
+				label="Product"
+				value={productSelected}
+				onChange={e => setProductSelected(e.target.value)}
+				variant="outlined"
+				fullWidth
+				>
+				{products[0].map((option) => (
+					<MenuItem key={option._id} value={option._id}>
+						{option.name}
+					</MenuItem>
+				))}
+			</TextField><br /><br />
 			
-			<label>Product</label><br />
-			<select name="product" value={productSelected} onChange={e => setProductSelected(e.target.value)} required>
-				<option key="0" value="0" disabled>Select Product</option>
-				{optionsProducts}
-			</select><br />
+			<TextField name="quantity" value={item.quantity} label="Quantity" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
 
-			<label>Quantity: </label><br />
-			<input type="text" name="quantity" value={item.quantity} onChange={handleInputChange} required /><br />
+			<MuiPickersUtilsProvider utils={DateFnsUtils}>
+				<DateTimePicker
+					name="deliveryDate"
+					label="Delivery Date"
+					inputVariant="outlined"
+					value={deliveryDateSelected}
+					format="yyyy-MM-dd HH:mm"
+					fullWidth
+					onChange={handleDateChange}
+				/>
+			</MuiPickersUtilsProvider><br /><br />
+			
+			<TextField name="note" value={item.note} label="Note" variant="outlined" fullWidth multiline rows={4} onChange={handleInputChange} /><br /><br />
 
-			<label>Delivery Date: </label><br />
-			<input type="datetime-local" name="deliveryDate" value={item.deliveryDate} onChange={handleInputChange} required /><br />
-
-			<label>Note: </label><br />
-			<textarea name="note" value={item.note} onChange={handleInputChange}></textarea><br /><br />
-
-			<button><i className="fa fa-close"></i> Cancel</button> 
-			<button><i className="fa fa-hdd-o"></i> Save</button>
-			<br /><br />
+			<IconButton><CancelIcon /> Cancel</IconButton>
+			<IconButton type="submit"><SaveIcon /> Save</IconButton>
 		</Form>
 	)
 }

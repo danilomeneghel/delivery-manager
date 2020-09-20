@@ -12,6 +12,16 @@ exports.productsList = (req, res) => {
     })
 }
 
+exports.productsCombo = (req, res) => {
+    Product.find()
+    .select({ "_id": 1, "name": 2 })
+    .exec((err, results) => {
+        if (err) return res.send(err)
+
+        res.status(200).json(results)
+    })
+}
+
 exports.productCreate = (req, res) => {
     Product.create(req.body.item)
     .then((result) => {

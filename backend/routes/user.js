@@ -6,6 +6,9 @@ module.exports = (app) => {
     app.route('/users-list')
         .get(user.usersList)
     
+    app.route('/users-combo')
+        .get(user.usersCombo)
+    
     app.route('/user-create')
         .post(user.userCreate)
     

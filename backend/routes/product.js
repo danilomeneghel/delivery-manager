@@ -7,6 +7,9 @@ module.exports = (app) => {
     app.route('/products-list')
         .get(product.productsList)
     
+    app.route('/products-combo')
+        .get(product.productsCombo)
+    
     app.route('/product-create')
         .post(product.productCreate)
     
