@@ -80,6 +80,7 @@ const styles = theme => ({
     margin: '12px 25px',
     borderRadius: '6px',
     fontWeight: '600 !important',
+    fontSize: '12px !important',
   },
   editButton: {
     color: '#fff !important',
@@ -88,6 +89,7 @@ const styles = theme => ({
     margin: '12px 25px',
     borderRadius: '6px',
     fontWeight: '600 !important',
+    fontSize: '12px !important',
   },
   viewButton: {
     color: '#ff6d00 !important',
@@ -97,6 +99,7 @@ const styles = theme => ({
     margin: '12px 25px',
     borderRadius: '6px',
     fontWeight: '600 !important',
+    fontSize: '12px !important',
   },
   marginCenter: {
     display: 'block',

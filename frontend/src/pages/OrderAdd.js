@@ -59,7 +59,7 @@ const AddForm = props => {
 		>
 			{msg.success && <p>{msg.success}</p>}
           	{msg.error && <p>{msg.error}</p>}
-						
+			
 			<TextField
 				select
 				name="user"
@@ -108,7 +108,7 @@ const AddForm = props => {
 			
 			<TextField name="note" value={item.note} label="Note" variant="outlined" fullWidth multiline rows={4} onChange={handleInputChange} /><br /><br />
 
-			<IconButton><CancelIcon /> Cancel</IconButton>
+			<IconButton onClick={props.handleClose}><CancelIcon /> Cancel</IconButton>
 			<IconButton type="submit"><SaveIcon /> Save</IconButton>
 		</Form>
 	)

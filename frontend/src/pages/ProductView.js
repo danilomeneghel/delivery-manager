@@ -1,4 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import { IconButton } from "@material-ui/core";
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const ViewForm = props => {
 	const [ item, setForm ] = useState(props.currentView)
@@ -23,7 +25,8 @@ const ViewForm = props => {
 				{item.description}
 			</fieldset>
 			
-			<br /><br />
+			<br />
+			<IconButton onClick={props.handleClose}><CancelIcon /> Close</IconButton>
 		</Fragment>
 	)
 }

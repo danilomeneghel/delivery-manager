@@ -153,6 +153,7 @@ class Products extends Component {
 									<EditForm
 									editing={this.state.edit}
 									currentEdit={this.state.arrayItems}
+									handleClose={this.handleClose}
 									editForm={this.editForm}/>
 								</div>
 							</Fragment>
@@ -160,14 +161,18 @@ class Products extends Component {
 							<Fragment>
 								<h2 id="simple-modal-title">Add {this.title}</h2>
 								<div id="simple-modal-description">
-									<AddForm addForm={this.addForm} />
+									<AddForm 
+									handleClose={this.handleClose}
+									addForm={this.addForm} />
 								</div>
 							</Fragment>
 						) : (
 							<Fragment>
 								<h2 id="simple-modal-title">View {this.title}</h2>
 								<div id="simple-modal-description">
-									<ViewForm currentView={this.state.arrayItems}/>
+									<ViewForm 
+									handleClose={this.handleClose}
+									currentView={this.state.arrayItems}/>
 								</div>
 							</Fragment>
 						))}	

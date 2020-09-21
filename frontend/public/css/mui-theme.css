@@ -1,6 +1,7 @@
 body {
 	background-color: #121212 !important;
 	color: #fff !important;
+	line-height: 1.45 !important;
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
 	"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Lato",
@@ -95,6 +96,8 @@ select {
 
 button {
 	margin: 0px 6px 0px 0px !important;
+	font-weight: 500 !important;
+	font-size: 15px !important;
 }
 
 .fa-user-circle {
@@ -360,6 +363,15 @@ table th:last-child span {
 	color: #fff !important;
 	border: 1px solid #ddd;
 	transform: translate(-50%, -50%);
+}
+
+.modal .MuiButtonBase-root {
+	background-color: #ff6d00 !important;
+	color: #fff !important;
+	border: 1px solid #ff9042 !important;
+	border-radius: 6px;
+	box-shadow: 1px 1px 2px 0px #ff852d !important;
+	font-weight: 500 !important;
 }
 
 @media (max-width: 650px) {

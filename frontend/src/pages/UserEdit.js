@@ -97,7 +97,7 @@ const EditForm = props => {
 				))}
 			</TextField><br /><br />
 			
-			<IconButton><CancelIcon /> Cancel</IconButton>
+			<IconButton onClick={props.handleClose}><CancelIcon /> Cancel</IconButton>
 			<IconButton type="submit"><SaveIcon /> Save</IconButton>
 		</Form>
 	)

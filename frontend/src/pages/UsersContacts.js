@@ -184,6 +184,7 @@ class UsersContacts extends Component {
 									editing={this.state.edit}
 									currentEdit={this.state.arrayItems}
 									users={this.state.users}
+									handleClose={this.handleClose}
 									editForm={this.editForm}/>
 								</div>
 							</Fragment>
@@ -193,6 +194,7 @@ class UsersContacts extends Component {
 								<div id="simple-modal-description">
 									<AddForm 
 									users={this.state.users}
+									handleClose={this.handleClose}
 									addForm={this.addForm} />
 								</div>
 							</Fragment>
@@ -200,7 +202,9 @@ class UsersContacts extends Component {
 							<Fragment>
 								<h2 id="simple-modal-title">View {this.title}</h2>
 								<div id="simple-modal-description">
-									<ViewForm currentView={this.state.arrayItems}/>
+									<ViewForm 
+									handleClose={this.handleClose}
+									currentView={this.state.arrayItems}/>
 								</div>
 							</Fragment>
 						))}	

@@ -73,7 +73,7 @@ const AddForm = props => {
 			
 			<TextField name="phone" value={item.phone} label="Phone" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
 
-			<IconButton><CancelIcon /> Cancel</IconButton>
+			<IconButton onClick={props.handleClose}><CancelIcon /> Cancel</IconButton>
 			<IconButton type="submit"><SaveIcon /> Save</IconButton>
 			<br /><br />
 		</Form>

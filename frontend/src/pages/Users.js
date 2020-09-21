@@ -169,6 +169,7 @@ class Users extends Component {
 									currentEdit={this.state.arrayItems}
 									roles={this.state.roles}
 									statuses={this.state.statuses}
+									handleClose={this.handleClose}
 									editForm={this.editForm}/>
 								</div>
 							</Fragment>
@@ -179,6 +180,7 @@ class Users extends Component {
 									<AddForm 
 									roles={this.state.roles}
 									statuses={this.state.statuses}
+									handleClose={this.handleClose}
 									addForm={this.addForm} />
 								</div>
 							</Fragment>
@@ -186,7 +188,9 @@ class Users extends Component {
 							<Fragment>
 								<h2 id="simple-modal-title">View {this.title}</h2>
 								<div id="simple-modal-description">
-									<ViewForm currentView={this.state.arrayItems}/>
+									<ViewForm 
+									handleClose={this.handleClose}
+									currentView={this.state.arrayItems}/>
 								</div>
 							</Fragment>
 						))}	

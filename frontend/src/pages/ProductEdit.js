@@ -55,7 +55,7 @@ const EditForm = props => {
 			
 			<TextField name="description" value={item.description} label="Description" variant="outlined" fullWidth multiline rows={4} onChange={handleInputChange} required /><br /><br />
 			
-			<IconButton><CancelIcon /> Cancel</IconButton>
+			<IconButton onClick={props.handleClose}><CancelIcon /> Cancel</IconButton>
 			<IconButton type="submit"><SaveIcon /> Save</IconButton>
 		</Form>
 	)
