@@ -182,6 +182,10 @@ button {
 	text-align: center;
 }
 
+.MuiInputAdornment-root svg {
+	color: #ff6d00 !important;
+}
+
 .MuiInputLabel-root {
 	color: #cacaca !important;
 }

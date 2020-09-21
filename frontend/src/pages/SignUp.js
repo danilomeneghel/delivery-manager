@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import api from "../services/api";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, InputAdornment, Button } from "@material-ui/core";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import EmailIcon from '@material-ui/icons/Email';
+import PersonIcon from '@material-ui/icons/Person';
+import LockIcon from '@material-ui/icons/Lock';
 import { Form, Container } from "../styles/form";
 
 class SignUp extends Component {
@@ -43,42 +47,71 @@ class SignUp extends Component {
         <Form onSubmit={this.handleSignUp}>
           {this.state.success && <p>{this.state.success}</p>}
           {this.state.error && <p>{this.state.error}</p>}
-          <i className="fa fa-user-circle"></i>
+          
           <TextField
             type="text"
-            label="Name"
+            placeholder="Name"
             variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AccountCircleIcon />
+                </InputAdornment>
+              ),
+            }}
             onChange={e => this.setState({ name: e.target.value })}
             fullWidth
             required
           /><br /><br />
-          <i className="fa fa-envelope"></i>
+
           <TextField
             type="email"
-            label="E-mail"
+            placeholder="E-mail"
             variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <EmailIcon />
+                </InputAdornment>
+              ),
+            }}
             onChange={e => this.setState({ email: e.target.value })}
             fullWidth
             required
           /><br /><br />
-          <i className="fa fa-user"></i>
+
           <TextField
             type="text"
-            label="Username"
+            placeholder="Username"
             variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PersonIcon />
+                </InputAdornment>
+              ),
+            }}
             onChange={e => this.setState({ username: e.target.value })}
             fullWidth
             required
           /><br /><br />
-          <i className="fa fa-lock"></i>
+
           <TextField
             type="password"
-            label="Password"
+            placeholder="Password"
             variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <LockIcon />
+                </InputAdornment>
+              ),
+            }}
             onChange={e => this.setState({ password: e.target.value })}
             fullWidth
             required
           /><br /><br />
+          
           <Button type="submit" fullWidth>Sign Up</Button>
         </Form>
       </Container>

@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import api from "../services/api";
 import { login } from "../services/auth";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, InputAdornment, Button } from "@material-ui/core";
+import PersonIcon from '@material-ui/icons/Person';
+import LockIcon from '@material-ui/icons/Lock';
 import { Form, Container } from "../styles/form";
 
 class SignIn extends Component {
@@ -36,20 +38,37 @@ class SignIn extends Component {
         <Form onSubmit={this.handleSignIn}>
           {this.state.success && <p>{this.state.success}</p>}
           {this.state.error && <p>{this.state.error}</p>}
+
           <TextField
             type="text"
-            label="Username"
+            placeholder="Username"
             variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PersonIcon />
+                </InputAdornment>
+              ),
+            }}
             onChange={e => this.setState({ username: e.target.value })}
             fullWidth
           /><br /><br />
+
           <TextField
             type="password"
-            label="Password"
+            placeholder="Password"
             variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <LockIcon />
+                </InputAdornment>
+              ),
+            }}
             onChange={e => this.setState({ password: e.target.value })}
             fullWidth
           /><br /><br />
+          
           <Button type="submit" fullWidth>Sign In</Button>
         </Form>
       </Container>
