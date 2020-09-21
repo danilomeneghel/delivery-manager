@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import api from "../services/api";
 import { login } from "../services/auth";
+import { TextField, Button } from "@material-ui/core";
 import { Form, Container } from "../styles/form";
 
 class SignIn extends Component {
@@ -35,21 +36,21 @@ class SignIn extends Component {
         <Form onSubmit={this.handleSignIn}>
           {this.state.success && <p>{this.state.success}</p>}
           {this.state.error && <p>{this.state.error}</p>}
-          <i className="fa fa-user"></i>
-          <input
-            type="username"
-            placeholder="Username"
+          <TextField
+            type="text"
+            label="Username"
+            variant="outlined"
             onChange={e => this.setState({ username: e.target.value })}
-            className="input-login"
-          />
-          <i className="fa fa-lock"></i>
-          <input
+            fullWidth
+          /><br /><br />
+          <TextField
             type="password"
-            placeholder="Password"
+            label="Password"
+            variant="outlined"
             onChange={e => this.setState({ password: e.target.value })}
-            className="input-login"
-          />
-          <button type="submit" className="btn btn-login btn-lg btn-block">Sign In</button>
+            fullWidth
+          /><br /><br />
+          <Button type="submit" fullWidth>Sign In</Button>
         </Form>
       </Container>
     )

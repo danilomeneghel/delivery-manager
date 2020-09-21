@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+import { TextField, MenuItem, IconButton } from "@material-ui/core";
+import CancelIcon from '@material-ui/icons/Cancel';
+import SaveIcon from '@material-ui/icons/Save';
 import { Form } from "../styles/form";
 import api from "../services/api";
 
 const AddForm = props => {
 	const [ item, setForm ] = useState([])
 	const [ msg, setMsg ] = useState({})
+	const roles = props.roles
+	const statuses = props.statuses
+	const [ roleSelected, setRoleSelected ] = useState(roles[0])
+	const [ statusSelected, setStatusSelected ] = useState(statuses[0])
 	
 	const handleInputChange = event => {
 		const { name, value } = event.target
@@ -12,6 +19,8 @@ const AddForm = props => {
 	}
 	
 	const saveItem = item => {
+		item.role = roleSelected
+		item.status = statusSelected
 		api.post('/user-create', { item })
 		.then(response => {
 			var id = { _id: response.data.result._id }
@@ -49,35 +58,48 @@ const AddForm = props => {
 			{msg.success && <p>{msg.success}</p>}
           	{msg.error && <p>{msg.error}</p>}
 			
-			<label>Name: </label><br />
-			<input type="text" name="name" value={item.name} onChange={handleInputChange} required /><br />
-
-			<label>Username: </label><br />
-			<input type="text" name="username" value={item.username} onChange={handleInputChange} required /><br />
-
-			<label>E-mail: </label><br />
-			<input type="email" name="email" value={item.email} onChange={handleInputChange} required /><br />
-
-			<label>Password</label><br />
-			<input type="text" name="password" value={item.password} onChange={handleInputChange} required /><br />
+			<TextField name="name" value={item.name} label="Name" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
 			
-			<label>Role</label><br />
-			<select name="role" onChange={handleInputChange} required>
-				<option value="">Role</option>
-				<option value="admin">Admin</option>
-				<option value="user">User</option>
-			</select><br />
-
-			<label>Status</label><br />
-			<select name="status" onChange={handleInputChange} required>
-				<option value="">Status</option>
-				<option value="active">Active</option>
-				<option value="inactive">Inactive</option>
-			</select><br /><br />
-
-			<button><i className="fa fa-close"></i> Cancel</button> 
-			<button><i className="fa fa-hdd-o"></i> Save</button>
-			<br /><br />
+			<TextField name="username" value={item.username} label="Username" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
+			
+			<TextField name="email" value={item.email} label="E-mail" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
+			
+			<TextField name="password" value={item.password} label="Password" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
+			
+			<TextField
+				select
+				name="role"
+				label="Role"
+				value={roleSelected}
+				onChange={e => setRoleSelected(e.target.value)}
+				variant="outlined"
+				fullWidth
+			>
+				{roles.map((option) => (
+					<MenuItem key={option} value={option}>
+						{option}
+					</MenuItem>
+				))}
+			</TextField><br /><br />
+			
+			<TextField
+				select
+				name="status"
+				label="Status"
+				value={statusSelected}
+				onChange={e => setStatusSelected(e.target.value)}
+				variant="outlined"
+				fullWidth
+			>
+				{statuses.map((option) => (
+					<MenuItem key={option} value={option}>
+						{option}
+					</MenuItem>
+				))}
+			</TextField><br /><br />
+			
+			<IconButton><CancelIcon /> Cancel</IconButton>
+			<IconButton type="submit"><SaveIcon /> Save</IconButton>
 		</Form>
 	)
 }

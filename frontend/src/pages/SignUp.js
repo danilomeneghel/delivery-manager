@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import api from "../services/api";
+import { TextField, Button } from "@material-ui/core";
 import { Form, Container } from "../styles/form";
 
 class SignUp extends Component {
@@ -43,34 +44,42 @@ class SignUp extends Component {
           {this.state.success && <p>{this.state.success}</p>}
           {this.state.error && <p>{this.state.error}</p>}
           <i className="fa fa-user-circle"></i>
-          <input
+          <TextField
             type="text"
-            placeholder="Name"
+            label="Name"
+            variant="outlined"
             onChange={e => this.setState({ name: e.target.value })}
-            className="input-login"
-          />
+            fullWidth
+            required
+          /><br /><br />
           <i className="fa fa-envelope"></i>
-          <input
+          <TextField
             type="email"
-            placeholder="E-mail"
+            label="E-mail"
+            variant="outlined"
             onChange={e => this.setState({ email: e.target.value })}
-            className="input-login"
-          />
+            fullWidth
+            required
+          /><br /><br />
           <i className="fa fa-user"></i>
-          <input
+          <TextField
             type="text"
-            placeholder="Username"
+            label="Username"
+            variant="outlined"
             onChange={e => this.setState({ username: e.target.value })}
-            className="input-login"
-          />
+            fullWidth
+            required
+          /><br /><br />
           <i className="fa fa-lock"></i>
-          <input
+          <TextField
             type="password"
-            placeholder="Password"
+            label="Password"
+            variant="outlined"
             onChange={e => this.setState({ password: e.target.value })}
-            className="input-login"
-          />
-          <button type="submit" className="btn btn-login btn-lg btn-block">Sign Up</button>
+            fullWidth
+            required
+          /><br /><br />
+          <Button type="submit" fullWidth>Sign Up</Button>
         </Form>
       </Container>
     )

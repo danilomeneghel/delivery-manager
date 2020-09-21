@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { TextField, MenuItem, IconButton } from "@material-ui/core";
+import CancelIcon from '@material-ui/icons/Cancel';
+import SaveIcon from '@material-ui/icons/Save';
 import { Form } from "../styles/form";
 import api from "../services/api";
 
 const EditForm = props => {
 	const [ item, setForm ] = useState(props.currentEdit)
 	const [ msg, setMsg ] = useState({})
-	const users = useState(props.users)
+	const users = useState([{ "_id": "0", "name": "Select User" }].concat(props.users))
 	const [ userSelected, setUserSelected ] = useState(item.userSelected)
-
+	
 	useEffect( () => { setForm(props.currentEdit) },
 		[ props ]
 	)
@@ -40,10 +43,6 @@ const EditForm = props => {
 		})
 	}
 
-	const optionsUsers = users[0].map((opt) => 
-		<option key={opt._id} value={opt._id}>{opt.name}</option>
-	)
-
 	return (
 		<Form
 		  onSubmit={event => {
@@ -54,22 +53,31 @@ const EditForm = props => {
 			{msg.success && <p>{msg.success}</p>}
           	{msg.error && <p>{msg.error}</p>}
 			
-			<label>User</label><br />
-			<select name="user" value={userSelected} onChange={e => setUserSelected(e.target.value)} required>
-				{optionsUsers}
-			</select><br />
+			<TextField
+				select
+				name="user"
+				label="User"
+				value={userSelected}
+				onChange={e => setUserSelected(e.target.value)}
+				variant="outlined"
+				fullWidth
+			>
+				{users[0].map((option) => (
+					<MenuItem key={option._id} value={option._id}>
+						{option.name}
+					</MenuItem>
+				))}
+			</TextField><br /><br />
 
-			<label>Address: </label><br />
-			<input type="text" name="address" value={item.address} onChange={handleInputChange} required /><br />
+			<TextField name="address" value={item.address} label="Address" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
+			
+			<TextField name="city" value={item.city} label="City" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
+			
+			<TextField name="phone" value={item.phone} label="Phone" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
 
-			<label>City: </label><br />
-			<input type="text" name="city" value={item.city} onChange={handleInputChange} required /><br />
-
-			<label>Phone</label><br />
-			<input type="text" name="phone" value={item.phone} onChange={handleInputChange} required /><br /><br />
-
-			<button><i className="fa fa-close"></i> Cancel</button> 
-			<button><i className="fa fa-hdd-o"></i> Save</button>
+			<IconButton><CancelIcon /> Cancel</IconButton>
+			<IconButton type="submit"><SaveIcon /> Save</IconButton>
+			<br /><br />
 		</Form>
 	)
 }

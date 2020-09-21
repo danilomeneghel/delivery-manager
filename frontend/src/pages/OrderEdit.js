@@ -71,7 +71,7 @@ const EditForm = props => {
 				variant="outlined"
 				fullWidth
 				required
-				>
+			>
 				{users[0].map((option) => (
 					<MenuItem key={option._id} value={option._id}>
 						{option.name}
@@ -88,7 +88,7 @@ const EditForm = props => {
 				variant="outlined"
 				fullWidth
 				required
-				>
+			>
 				{products[0].map((option) => (
 					<MenuItem key={option._id} value={option._id}>
 						{option.name}
@@ -96,7 +96,7 @@ const EditForm = props => {
 				))}
 			</TextField><br /><br />
 			
-			<TextField name="quantity" value={item.quantity} label="Quantity" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
+			<TextField type="number" name="quantity" value={item.quantity} label="Quantity" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
 
 			<MuiPickersUtilsProvider utils={DateFnsUtils}>
 				<DateTimePicker

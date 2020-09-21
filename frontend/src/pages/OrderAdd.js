@@ -68,7 +68,7 @@ const AddForm = props => {
 				onChange={e => setUserSelected(e.target.value)}
 				variant="outlined"
 				fullWidth
-				>
+			>
 				{users[0].map((option) => (
 					<MenuItem key={option._id} value={option._id}>
 						{option.name}
@@ -84,7 +84,7 @@ const AddForm = props => {
 				onChange={e => setProductSelected(e.target.value)}
 				variant="outlined"
 				fullWidth
-				>
+			>
 				{products[0].map((option) => (
 					<MenuItem key={option._id} value={option._id}>
 						{option.name}
@@ -92,7 +92,7 @@ const AddForm = props => {
 				))}
 			</TextField><br /><br />
 			
-			<TextField name="quantity" value={item.quantity} label="Quantity" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
+			<TextField type="number" name="quantity" value={item.quantity} label="Quantity" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
 
 			<MuiPickersUtilsProvider utils={DateFnsUtils}>
 				<DateTimePicker

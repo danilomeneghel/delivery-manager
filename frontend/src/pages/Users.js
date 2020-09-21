@@ -26,6 +26,14 @@ class Users extends Component {
 		.then(response => {
 			this.setState({ results: response.data })
 		})
+
+		this.setState({ 
+			roles: [ "Select Role", "admin", "user" ]
+		})
+		
+		this.setState({ 
+			statuses: [ "Select Status", "active", "inactive" ]
+		})
 	}
 
 	handleAdd = () => {
@@ -159,6 +167,8 @@ class Users extends Component {
 									<EditForm
 									editing={this.state.edit}
 									currentEdit={this.state.arrayItems}
+									roles={this.state.roles}
+									statuses={this.state.statuses}
 									editForm={this.editForm}/>
 								</div>
 							</Fragment>
@@ -166,7 +176,10 @@ class Users extends Component {
 							<Fragment>
 								<h2 id="simple-modal-title">Add {this.title}</h2>
 								<div id="simple-modal-description">
-									<AddForm addForm={this.addForm} />
+									<AddForm 
+									roles={this.state.roles}
+									statuses={this.state.statuses}
+									addForm={this.addForm} />
 								</div>
 							</Fragment>
 						) : (
