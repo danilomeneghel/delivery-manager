@@ -24,8 +24,11 @@ const AddForm = props => {
 	
 	const saveItem = item => {
 		item.user = userSelected.id
+
 		item.product = productSelected.id
+		
 		item.deliveryDate = deliveryDateSelected
+		
 		api.post('/order-create', { item })
 		.then(response => {
 			if(response.data.success) {

@@ -18,6 +18,7 @@ const AddForm = props => {
 	
 	const saveItem = item => {
 		item.user = userSelected.id
+		
 		api.post('/user-contact-create', { item })
 		.then(response => {
 			if(response.data.success) {

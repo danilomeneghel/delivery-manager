@@ -131,6 +131,7 @@ class TopBar extends Component {
                       <AppBar title="Menu" />
                       <List>
                         {this.menuLinks.map((item, index) => {
+                          /* eslint eqeqeq: 0 */
                           if (item.access[0] == getUserLogged().role || item.access[1] == getUserLogged().role)
                             return <ListItem
                               button
@@ -146,6 +147,7 @@ class TopBar extends Component {
                             >
                               <ListItemText primary={item.label} />
                             </ListItem>
+                          return null
                         })}
                       </List>
                     </SwipeableDrawer>
@@ -156,6 +158,7 @@ class TopBar extends Component {
                       onChange={this.handleChange}
                     >
                       {this.menuLinks.map((item, index) => {
+                        /* eslint eqeqeq: 0 */
                         if (item.access[0] == getUserLogged().role || item.access[1] == getUserLogged().role)
                           return <Tab
                             key={index}
@@ -169,6 +172,7 @@ class TopBar extends Component {
                             classes={{ root: classes.tabItem }}
                             label={item.label}
                           />
+                        return null
                       })}
                     </Tabs>
                   </div>

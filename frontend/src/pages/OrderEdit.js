@@ -27,9 +27,18 @@ const EditForm = props => {
 	}
 	
 	const saveItem = (_id, item) => {
-		item.user = userSelected.id
-		item.product = productSelected.id
+		if(userSelected.id != null)
+			item.user = userSelected.id
+		else
+			users[0].map((option) => ( item.user = option._id ))
+		
+		if(productSelected.id != null)
+			item.product = productSelected.id
+		else
+			products[0].map((option) => ( item.product = option._id ))
+		
 		item.deliveryDate = deliveryDateSelected
+
 		api.post('/order-update/'+_id, { item })
 		.then(response => {
 			if(response.data.success) {

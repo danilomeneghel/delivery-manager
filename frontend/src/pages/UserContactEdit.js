@@ -21,7 +21,11 @@ const EditForm = props => {
 	}
 
 	const saveItem = (_id, item) => {
-		item.user = userSelected.id
+		if(userSelected.id != null)
+			item.user = userSelected.id
+		else
+			users[0].map((option) => ( item.user = option._id ))
+		
 		api.post('/user-contact-update/'+_id, { item })
 		.then(response => {
 			if(response.data.success) {
