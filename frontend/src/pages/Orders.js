@@ -83,16 +83,7 @@ class Orders extends Component {
 	}
 	
 	viewItem = item => {
-		this.setState({ 
-			arrayItems: {
-				_id: item[0], 
-				user: item[1], 
-				product: item[2], 
-				quantity: item[3], 
-				deliveryDate: item[4], 
-				note: item[5]
-			} 
-		});
+		this.editItem(item);
 		this.handleView();
 	}
 

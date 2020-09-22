@@ -77,15 +77,7 @@ class UsersContacts extends Component {
 	}
 	
 	viewItem = item => {
-		this.setState({ 
-			arrayItems: {
-				_id: item[0], 
-				user: item[1], 
-				address: item[2], 
-				city: item[3], 
-				phone: item[4]
-			} 
-		});
+		this.editItem(item);
 		this.handleView();
 	}
 
