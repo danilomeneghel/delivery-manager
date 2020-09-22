@@ -11,24 +11,24 @@ import api from "../services/api";
 const EditForm = props => {
 	const [ item, setForm ] = useState(props.currentEdit)
 	const [ msg, setMsg ] = useState({})
-	const users = useState([{ "_id": "", "name": "Select User" }].concat(props.users))
-	const products = useState([{ "_id": "", "name": "Select Product" }].concat(props.products))
-	const [ userSelected, setUserSelected ] = useState(item.userSelected)
-	const [ productSelected, setProductSelected ] = useState(item.productSelected)
+	const users = useState(props.users)
+	const products = useState(props.products)
+	const [ userSelected, setUserSelected ] = useState({ id: null, value: item.user })
+	const [ productSelected, setProductSelected ] = useState({ id: null, value: item.product })
 	const [ deliveryDateSelected, handleDateChange ] = useState(item.deliveryDate)
 
 	useEffect( () => { setForm(props.currentEdit) },
 		[ props ]
 	)
 
-	const handleInputChange = event => {
+	const handleInputChange = (event) => {
 		const { name, value } = event.target
 		setForm({ ...item, [name]: value })
 	}
-
+	
 	const saveItem = (_id, item) => {
-		item.user = userSelected
-		item.product = productSelected
+		item.user = userSelected.id
+		item.product = productSelected.id
 		item.deliveryDate = deliveryDateSelected
 		api.post('/order-update/'+_id, { item })
 		.then(response => {
@@ -36,8 +36,8 @@ const EditForm = props => {
 				setMsg({ success: response.data.success, error: "" })
 				var items = {
 					_id: item._id,
-					user: item.user,
-					product: item.product,
+					user: userSelected.value,
+					product: productSelected.value,
 					quantity: item.quantity,
 					deliveryDate: item.deliveryDate,
 					note: item.note
@@ -66,14 +66,14 @@ const EditForm = props => {
 				select
 				name="user"
 				label="User"
-				value={userSelected}
-				onChange={e => setUserSelected(e.target.value)}
+				value={userSelected.value}
+				onChange={e => setUserSelected({ id: e.currentTarget.id, value: e.target.value })}
 				variant="outlined"
 				fullWidth
 				required
 			>
 				{users[0].map((option) => (
-					<MenuItem key={option._id} value={option._id}>
+					<MenuItem key={option._id} id={option._id} value={option.name}>
 						{option.name}
 					</MenuItem>
 				))}
@@ -83,14 +83,14 @@ const EditForm = props => {
 				select
 				name="product"
 				label="Product"
-				value={productSelected}
-				onChange={e => setProductSelected(e.target.value)}
+				value={productSelected.value}
+				onChange={e => setProductSelected({ id: e.currentTarget.id, value: e.target.value })}
 				variant="outlined"
 				fullWidth
 				required
 			>
 				{products[0].map((option) => (
-					<MenuItem key={option._id} value={option._id}>
+					<MenuItem key={option._id} id={option._id} value={option.name}>
 						{option.name}
 					</MenuItem>
 				))}

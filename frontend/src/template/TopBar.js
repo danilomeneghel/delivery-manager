@@ -8,6 +8,7 @@ import { Link as MaterialLink } from "@material-ui/core";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuIcon from "@material-ui/icons/Menu";
+import { getUserLogged } from "../services/auth";
 import styles from "../styles/global";
 
 class TopBar extends Component {
@@ -54,26 +55,31 @@ class TopBar extends Component {
     {
       label: "Home",
       pathname: "/",
+      access: [ "admin", "user" ],
       value: 0
     },
     {
       label: "Orders",
       pathname: "/orders",
+      access: [ "admin", "user" ],
       value: 1
     },
     {
       label: "Products",
       pathname: "/products",
+      access: [ "admin" ],
       value: 2
     },
     {
       label: "Users",
       pathname: "/users",
+      access: [ "admin" ],
       value: 3
     },
     {
       label: "Contacts",
       pathname: "/users-contacts",
+      access: [ "admin", "user" ],
       value: 4
     }
   ]
@@ -124,22 +130,23 @@ class TopBar extends Component {
                     >
                       <AppBar title="Menu" />
                       <List>
-                        {this.menuLinks.map((item, index) => (
-                          <ListItem
-                            component={item.external ? MaterialLink : Link}
-                            href={item.external ? item.pathname : null}
-                            to={
-                              item.external ? null : {
-                                pathname: item.pathname,
-                                search: this.props.location.search
+                        {this.menuLinks.map((item, index) => {
+                          if (item.access[0] == getUserLogged().role || item.access[1] == getUserLogged().role)
+                            return <ListItem
+                              button
+                              key={index}
+                              component={item.external ? MaterialLink : Link}
+                              href={item.external ? item.pathname : null}
+                              to={
+                                item.external ? null : {
+                                  pathname: item.pathname,
+                                  search: this.props.location.search
+                                }
                               }
-                            }
-                            button
-                            key={item.label}
-                          >
-                            <ListItemText primary={item.label} />
-                          </ListItem>
-                        ))}
+                            >
+                              <ListItemText primary={item.label} />
+                            </ListItem>
+                        })}
                       </List>
                     </SwipeableDrawer>
                     <Tabs
@@ -148,20 +155,21 @@ class TopBar extends Component {
                       textColor="primary"
                       onChange={this.handleChange}
                     >
-                      {this.menuLinks.map((item, index) => (
-                        <Tab
-                          key={index}
-                          component={item.external ? MaterialLink : Link}
-                          href={item.external ? item.pathname : null}
-                          to={item.external ? null : {
-                              pathname: item.pathname,
-                              search: this.props.location.search
+                      {this.menuLinks.map((item, index) => {
+                        if (item.access[0] == getUserLogged().role || item.access[1] == getUserLogged().role)
+                          return <Tab
+                            key={index}
+                            component={item.external ? MaterialLink : Link}
+                            href={item.external ? item.pathname : null}
+                            to={item.external ? null : {
+                                pathname: item.pathname,
+                                search: this.props.location.search
+                              }
                             }
-                          }
-                          classes={{ root: classes.tabItem }}
-                          label={item.label}
-                        />
-                      ))}
+                            classes={{ root: classes.tabItem }}
+                            label={item.label}
+                          />
+                      })}
                     </Tabs>
                   </div>
                 </React.Fragment>

@@ -13,18 +13,18 @@ const AddForm = props => {
 	const [ msg, setMsg ] = useState({})
 	const users = useState([{ "_id": "0", "name": "Select User" }].concat(props.users))
 	const products = useState([{ "_id": "0", "name": "Select Product" }].concat(props.products))
-	const [ userSelected, setUserSelected ] = useState(users[0][0]._id)
-	const [ productSelected, setProductSelected ] = useState(products[0][0]._id)
+	const [ userSelected, setUserSelected ] = useState({ id: null, value: users[0][0].name })
+	const [ productSelected, setProductSelected ] = useState({ id: null, value: products[0][0].name })
 	const [ deliveryDateSelected, handleDateChange ] = useState(new Date())
 
-	const handleInputChange = event => {
+	const handleInputChange = (event) => {
 		const { name, value } = event.target
 		setForm({ ...item, [name]: value })
 	}
 	
 	const saveItem = item => {
-		item.user = userSelected
-		item.product = productSelected
+		item.user = userSelected.id
+		item.product = productSelected.id
 		item.deliveryDate = deliveryDateSelected
 		api.post('/order-create', { item })
 		.then(response => {
@@ -33,8 +33,8 @@ const AddForm = props => {
 				var result = response.data.result
 				var items = {
 					_id: result._id,
-					user: result.user,
-					product: result.product,
+					user: userSelected.value,
+					product: productSelected.value,
 					quantity: result.quantity,
 					deliveryDate: result.deliveryDate,
 					note: result.note
@@ -64,13 +64,13 @@ const AddForm = props => {
 				select
 				name="user"
 				label="User"
-				value={userSelected}
-				onChange={e => setUserSelected(e.target.value)}
+				value={userSelected.value}
+				onChange={e => setUserSelected({ id: e.currentTarget.id, value: e.target.value })}
 				variant="outlined"
 				fullWidth
 			>
 				{users[0].map((option) => (
-					<MenuItem key={option._id} value={option._id}>
+					<MenuItem key={option._id} id={option._id} value={option.name}>
 						{option.name}
 					</MenuItem>
 				))}
@@ -80,13 +80,13 @@ const AddForm = props => {
 				select
 				name="product"
 				label="Product"
-				value={productSelected}
-				onChange={e => setProductSelected(e.target.value)}
+				value={productSelected.value}
+				onChange={e => setProductSelected({ id: e.currentTarget.id, value: e.target.value })}
 				variant="outlined"
 				fullWidth
 			>
 				{products[0].map((option) => (
-					<MenuItem key={option._id} value={option._id}>
+					<MenuItem key={option._id} id={option._id} value={option.name}>
 						{option.name}
 					</MenuItem>
 				))}

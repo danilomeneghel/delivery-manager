@@ -9,7 +9,7 @@ const AddForm = props => {
 	const [ item, setForm ] = useState([])
 	const [ msg, setMsg ] = useState({})
 	const users = useState([{ "_id": "0", "name": "Select User" }].concat(props.users))
-	const [ userSelected, setUserSelected ] = useState(users[0][0]._id)
+	const [ userSelected, setUserSelected ] = useState({ id: null, value: users[0][0].name })
 	
 	const handleInputChange = event => {
 		const { name, value } = event.target
@@ -17,7 +17,7 @@ const AddForm = props => {
 	}
 	
 	const saveItem = item => {
-		item.user = userSelected
+		item.user = userSelected.id
 		api.post('/user-contact-create', { item })
 		.then(response => {
 			if(response.data.success) {
@@ -25,7 +25,7 @@ const AddForm = props => {
 				var result = response.data.result
 				var items = {
 					_id: result._id,
-					user: result.user,
+					user: userSelected.value,
 					address: result.address,
 					city: result.city,
 					phone: result.phone
@@ -55,13 +55,13 @@ const AddForm = props => {
 				select
 				name="user"
 				label="User"
-				value={userSelected}
-				onChange={e => setUserSelected(e.target.value)}
+				value={userSelected.value}
+				onChange={e => setUserSelected({ id: e.currentTarget.id, value: e.target.value })}
 				variant="outlined"
 				fullWidth
 			>
 				{users[0].map((option) => (
-					<MenuItem key={option._id} value={option._id}>
+					<MenuItem key={option._id} id={option._id} value={option.name}>
 						{option.name}
 					</MenuItem>
 				))}

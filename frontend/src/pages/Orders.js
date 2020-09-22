@@ -59,29 +59,11 @@ class Orders extends Component {
 	}
 	
 	addForm = item => {
-		this.state.users.forEach((value) => {
-			if (value._id === item.user) 
-				item.user = value.name;
-		});
-		this.state.products.forEach((value) => {
-			if (value._id === item.product) 
-				item.product = value.name;
-		});
 		this.setState({ array: this.data.concat([Object.values(item)]) });
 		this.handleClose();
 	}
 
 	editItem = item => {
-		var userSelected = null;
-		this.state.users.forEach((value) => {
-			if (value.name === item[1]) 
-				userSelected = value._id;
-		});
-		var productSelected = null;
-		this.state.products.forEach((value) => {
-			if (value.name === item[2]) 
-				productSelected = value._id;
-		});
 		this.setState({ 
 			arrayItems: {
 				_id: item[0], 
@@ -89,23 +71,13 @@ class Orders extends Component {
 				product: item[2], 
 				quantity: item[3], 
 				deliveryDate: item[4], 
-				note: item[5], 
-				userSelected: userSelected,
-				productSelected: productSelected
+				note: item[5]
 			} 
 		});
 		this.handleEdit();
 	}
 	
 	editForm = (_id, item) => {
-		this.state.users.forEach((value) => {
-			if (value._id === item.user) 
-				item.user = value.name;
-		});
-		this.state.products.forEach((value) => {
-			if (value._id === item.product) 
-				item.product = value.name;
-		});
 		this.setState({ array: this.data.map(result => (result[0] === _id ? Object.values(item) : result)) });
 		this.handleClose();
 	}

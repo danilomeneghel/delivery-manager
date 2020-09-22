@@ -9,7 +9,7 @@ const EditForm = props => {
 	const [ item, setForm ] = useState(props.currentEdit)
 	const [ msg, setMsg ] = useState({})
 	const users = useState([{ "_id": "0", "name": "Select User" }].concat(props.users))
-	const [ userSelected, setUserSelected ] = useState(item.userSelected)
+	const [ userSelected, setUserSelected ] = useState({ id: null, value: item.user })
 	
 	useEffect( () => { setForm(props.currentEdit) },
 		[ props ]
@@ -21,14 +21,14 @@ const EditForm = props => {
 	}
 
 	const saveItem = (_id, item) => {
-		item.user = userSelected
+		item.user = userSelected.id
 		api.post('/user-contact-update/'+_id, { item })
 		.then(response => {
 			if(response.data.success) {
 				setMsg({ success: response.data.success, error: "" })
 				var items = {
 					_id: item._id,
-					user: item.user,
+					user: userSelected.value,
 					address: item.address,
 					city: item.city,
 					phone: item.phone
@@ -57,13 +57,14 @@ const EditForm = props => {
 				select
 				name="user"
 				label="User"
-				value={userSelected}
-				onChange={e => setUserSelected(e.target.value)}
+				value={userSelected.value}
+				onChange={e => setUserSelected({ id: e.currentTarget.id, value: e.target.value })}
 				variant="outlined"
 				fullWidth
+				required
 			>
 				{users[0].map((option) => (
-					<MenuItem key={option._id} value={option._id}>
+					<MenuItem key={option._id} id={option._id} value={option.name}>
 						{option.name}
 					</MenuItem>
 				))}

@@ -35,7 +35,7 @@ export default props => (
         <PrivateRoute exact path='/products' component={ Products } />
         <PrivateRoute exact path='/users' component={ Users } />
         <PrivateRoute exact path='/users-contacts' component={ UsersContacts } />
-        <Route path="*" component={() => <h1>Page not found</h1>} />
+        <Route path="*" component={ () => <div id="not-found"><h1>Page not found</h1></div> } />
       </Switch>
   </BrowserRouter>
 )
