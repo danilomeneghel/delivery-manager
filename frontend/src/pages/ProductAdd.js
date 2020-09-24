@@ -3,6 +3,7 @@ import { TextField, IconButton } from "@material-ui/core";
 import CancelIcon from '@material-ui/icons/Cancel';
 import SaveIcon from '@material-ui/icons/Save';
 import { Form } from "../styles/form";
+import NumberFormat from 'react-number-format';
 import api from "../services/api";
 
 const AddForm = props => {
@@ -15,6 +16,8 @@ const AddForm = props => {
 	}
 	
 	const saveItem = item => {
+		item.price = item.price.replace('$', '')
+
 		api.post('/product-create', { item })
 		.then(response => {
 			var id = { _id: response.data.result._id }
@@ -52,7 +55,7 @@ const AddForm = props => {
 			
 			<TextField name="name" value={item.name} label="Name" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
 			
-			<TextField name="price" value={item.price} label="Price" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
+			<NumberFormat name="price" value={item.price} label="Price" variant="outlined" fullWidth onChange={handleInputChange} customInput={TextField} thousandSeparator={false} prefix={'$'} required /><br /><br />
 			
 			<TextField name="description" value={item.description} label="Description" variant="outlined" fullWidth multiline rows={4} onChange={handleInputChange} required /><br /><br />
 			

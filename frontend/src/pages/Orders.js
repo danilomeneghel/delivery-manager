@@ -103,8 +103,8 @@ class Orders extends Component {
 		if(!!this.state.results) {
 			this.array = this.state.results.map(result => [
 				result._id, 
-				result.user.name, 
-				result.product.name, 
+				(result.user != null) ? result.user.name : null, 
+				(result.product != null) ? result.product.name : null, 
 				result.quantity, 
 				result.deliveryDate, 
 				result.note, 

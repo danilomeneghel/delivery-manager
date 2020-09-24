@@ -92,7 +92,7 @@ class Products extends Component {
 			this.array = this.state.results.map(result => [
 				result._id, 
 				result.name, 
-				result.price, 
+				'$' + result.price, 
 				result.description, 
 				'']
 			);

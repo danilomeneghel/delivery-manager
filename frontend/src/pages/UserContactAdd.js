@@ -3,6 +3,7 @@ import { TextField, MenuItem, IconButton } from "@material-ui/core";
 import CancelIcon from '@material-ui/icons/Cancel';
 import SaveIcon from '@material-ui/icons/Save';
 import { Form } from "../styles/form";
+import NumberFormat from 'react-number-format';
 import api from "../services/api";
 
 const AddForm = props => {
@@ -72,7 +73,7 @@ const AddForm = props => {
 			
 			<TextField name="city" value={item.city} label="City" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
 			
-			<TextField name="phone" value={item.phone} label="Phone" variant="outlined" fullWidth onChange={handleInputChange} required /><br /><br />
+			<NumberFormat name="phone" value={item.phone} label="Phone" variant="outlined" fullWidth onChange={handleInputChange} customInput={TextField} format="(##)####-#####" mask="" required /><br /><br />
 
 			<IconButton onClick={props.handleClose}><CancelIcon /> Cancel</IconButton>
 			<IconButton type="submit"><SaveIcon /> Save</IconButton>

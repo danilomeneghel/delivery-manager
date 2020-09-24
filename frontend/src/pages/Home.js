@@ -17,7 +17,7 @@ class Home extends Component {
 				<TopBar currentPath={currentPath} />
 				<div className={classes.marginHome}>
 					<h2>Welcome, {getUserLogged().name}!</h2>
-					<span>Delivery APP</span>
+					<span>Delivery Manager</span>
 				</div>
 			</Fragment>
 		)
