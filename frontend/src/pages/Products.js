@@ -75,6 +75,15 @@ class Products extends Component {
 		this.handleView();
 	}
 
+	deleteRows = (RowsDeleted) => {
+		this.state.results.forEach((item, key) => {
+			RowsDeleted.data.forEach(index => {
+				if(key === index.dataIndex)
+					api.get('/product-remove/' + item._id)
+			})
+		})
+	}
+	
 	render() {
 		
 		const { classes } = this.props;		
@@ -120,6 +129,7 @@ class Products extends Component {
 			multiple: true,
 			filterType: 'dropdown',
 			responsive: 'vertical',
+			onRowsDelete: this.deleteRows,
 			rowsPerPage: 10,
 			customToolbar: () => {
 			  return (

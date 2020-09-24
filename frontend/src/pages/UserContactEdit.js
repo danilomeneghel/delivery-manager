@@ -24,7 +24,11 @@ const EditForm = props => {
 		if(userSelected.id != null)
 			item.user = userSelected.id
 		else
-			users[0].find(option => { if(option.name === userSelected.value) item.user = option._id })
+			users[0].find(option => { 
+				if(option.name === userSelected.value) 
+					item.user = option._id 
+				return null	
+			})
 		
 		api.post('/user-contact-update/'+_id, { item })
 		.then(response => {

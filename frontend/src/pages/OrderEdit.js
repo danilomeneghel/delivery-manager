@@ -30,12 +30,20 @@ const EditForm = props => {
 		if(userSelected.id != null)
 			item.user = userSelected.id
 		else
-			users[0].find(option => { if(option.name === userSelected.value) item.user = option._id })
+			users[0].find(option => { 
+				if(option.name === userSelected.value) 
+					item.user = option._id 
+				return null 
+			})
 		
 		if(productSelected.id != null)
 			item.product = productSelected.id
 		else
-			products[0].find(option => { if(option.name === productSelected.value) item.product = option._id })
+			products[0].find(option => { 
+				if(option.name === productSelected.value) 
+					item.product = option._id 
+				return null
+			})
 		
 		item.deliveryDate = deliveryDateSelected
 		
