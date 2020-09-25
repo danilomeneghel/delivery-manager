@@ -1,7 +1,7 @@
 {
-  "name": "delivery-app",
+  "name": "delivery-manager",
   "version": "1.1.1",
-  "description": "APP Delivery project in ReactJS, NodeJS and MongoDB",
+  "description": "Delivery project in ReactJS, NodeJS and MongoDB",
   "author": "Danilo Meneghel",
   "license": "MIT",
   "scripts": {
