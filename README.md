@@ -46,18 +46,18 @@ Open the terminal, then run Mongodb:
 $ mongod
 ```
 
-Install the dependencies:
-
-
-```
-$ cd frontend && npm install
-$ cd backend && npm install
-```
-
-After that, run the Node and React and wait for the browser to load:
+To run the application, run the following command:
 
 ```
-$ npm start
+$ npm install && npm run start
+```
+
+
+If it doesn't work, try installing the dependencies and running separately.
+
+```
+$ cd backend && npm install && npm start
+$ cd frontend && npm install && npm start
 ```
 
 http://localhost:3000/
