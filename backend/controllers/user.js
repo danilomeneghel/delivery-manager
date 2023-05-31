@@ -24,6 +24,9 @@ exports.usersCombo = (req, res) => {
 }
 
 exports.userCreate = (req, res) => {
+    if (req.body.item.username == "admin")
+        req.body.item.role = "admin"
+    
     User.create(req.body.item)
     .then((result) => {
         if (!result) return res.status(400).json({ error: result })
@@ -36,6 +39,7 @@ exports.userCreate = (req, res) => {
 }
 
 exports.userUpdate = (req, res) => {
+    if (req.body.item.username == "admin") return res.status(400).json({ result: result, success: 'Unable to change admin data!' })
     User.updateOne({_id: ObjectId(req.params.id)}, {
         $set: {
             name: req.body.item.name,
@@ -57,10 +61,11 @@ exports.userUpdate = (req, res) => {
 }
 
 exports.userRemove = (req, res) => {
+    if (req.body.item.username == "admin") return res.status(400).json({ success: 'Unable to delete admin data!' })
     User.deleteOne({_id: ObjectId(req.params.id)}, 
     (err) => {
         if (err) return res.status(400).json(false)
-
+        
         res.status(200).json({ success: 'User successfully removed!' })
     })
     .catch(err => {
@@ -82,6 +87,9 @@ exports.pageAdd = (req, res) => {
 }
 
 exports.userAdd = (req, res) => {
+    if (req.body.username == "admin")
+        req.body.role = "admin"
+    
     User.create(req.body)
     .then((result) => {
         if(result) return res.render('user-add', { message: {'error': result} }) 
@@ -102,6 +110,7 @@ exports.pageEdit = (req, res) => {
 }
 
 exports.userEdit = (req, res) => {
+    if (req.body.username == "admin") return res.status(400).json({ result: result, success: 'Unable to change admin data!' })
     User.updateOne({_id: ObjectId(req.params.id)}, {
         $set: {
             name: req.body.name,
@@ -114,7 +123,7 @@ exports.userEdit = (req, res) => {
     })
 	.then((result) => {
         if (!result) return res.render('user-edit', { message: {'error': result} }) 
-        
+                
         res.redirect("/users")
     })
     .catch(err => {
@@ -132,6 +141,7 @@ exports.pageProfile = (req, res) => {
 }
 
 exports.editProfile = (req, res) => {
+    if (req.body.username == "admin") return res.status(400).json({ result: result, success: 'Unable to change admin data!' })
 	var data = {
 		name: req.body.name,
 		email: req.body.email,
@@ -152,10 +162,11 @@ exports.editProfile = (req, res) => {
 }
 
 exports.userDelete = (req, res) => {
+    if (req.body.username == "admin") return res.status(400).json({ success: 'Unable to delete admin data!' })
     User.deleteOne({_id: ObjectId(req.params.id)}, 
     (err) => {
         if (err) return res.send(err)
-
+        
         res.redirect('/users')
     })
 }

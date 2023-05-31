@@ -27,20 +27,20 @@ const EditForm = props => {
 		item.status = statusSelected
 		api.post('/user-update/'+_id, { item })
 		.then(response => {
-			if(response.data.success) {
-				setMsg({ success: response.data.success, error: "" })
-				var items = {
-					_id: item._id,
-					name: item.name,
-					username: item.username,
-					email: item.email,
-					role: item.role,
-					status: item.status
-				}
-				props.editForm(item._id, items)
-			} else {
-				setMsg({ error: "Registration error", success: "" })
-			}
+		    if(response.data.success) {
+			    setMsg({ success: response.data.success, error: "" })
+			    var items = {
+				    _id: item._id,
+				    name: item.name,
+				    username: item.username,
+				    email: item.email,
+				    role: item.role,
+				    status: item.status
+			    }
+			    props.editForm(item._id, items)
+		    } else {
+			    setMsg({ error: "Registration error", success: "" })
+		    }
 		})
 		.catch(err => {
 			setMsg({ error: "Registration error", success: "" })

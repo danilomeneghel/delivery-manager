@@ -87,10 +87,10 @@ class Users extends Component {
 
 	deleteRows = (RowsDeleted) => {
 		this.state.results.forEach((item, key) => {
-			RowsDeleted.data.forEach(index => {
-				if(key === index.dataIndex)
-					api.get('/user-remove/' + item._id)
-			})
+		    RowsDeleted.data.forEach(index => {
+			    if(key === index.dataIndex)
+				    api.get('/user-remove/' + item._id)
+		    })
 		})
 	}
 	

@@ -47,12 +47,6 @@ class Login extends Component {
                                 <div className="content" id="content1">
                                     <div className="form-panel">
                                         <SignIn />
-                                        <br /><br />
-                                        <div className="text-center">
-                                            <div className="login-teste">Login de Teste:</div>
-                                            Usuário: admin<br />
-                                            Senha: admin123<br />
-                                        </div>
                                     </div>
                                 </div>
 

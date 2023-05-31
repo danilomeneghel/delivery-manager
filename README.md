@@ -2,6 +2,13 @@
 
 Delivery project in ReactJS, NodeJS and MongoDB
 
+## Modules
+
+- Orders
+- Products
+- Users
+- Contacts
+
 ## Features
 
 - CRUD
