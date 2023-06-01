@@ -56,7 +56,7 @@ $ mongod
 To run the application, run the following command:
 
 ```
-$ npm install && npm run start
+$ npm install --force && npm run start
 ```
 
 
@@ -72,7 +72,7 @@ http://localhost:3000/
 
 ## Demonstration
 
-https://gnkcbh-3000.csb.app/
+https://tqlik0-3000.csb.app/
 
 - Login
     - Username: admin
