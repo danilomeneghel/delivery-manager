@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import logo from "../../public/images/logo.png";
 
 class Login extends Component {
   
@@ -31,7 +32,7 @@ class Login extends Component {
         return (
             <Fragment>
                 <div className="container-login">
-                    <div className="logo-login"></div>
+                    <div className="logo-login"><img src={logo} height="130" /></div>
                     <div className="panel">
                         <div className="box-login">
                             <div className="tabs">
